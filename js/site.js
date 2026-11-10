@@ -132,11 +132,14 @@
      доли миллисекунды, картинки на canvas тратили 25–50 мс на первый показ кадра. Скролл задаёт цель, показанный кадр догоняет её в тикере */
   const CU_FPS = 25, cuV = $('.cu-frame video');
   let cuT = 0, cuF = 0, cuLoading = false, cuDur = 0;
-  const cuLoad = () => { if (cuLoading) return; cuLoading = true; cuV.src = mob() ? cuV.dataset.flyM : cuV.dataset.flyD; cuV.preload = 'auto'; cuV.load();
+  /* ролик качается целиком в память (blob): перемотка по кускам с сервера давала рывки на хостинге; пока качается – виден постер */
+  const cuLoad = () => { if (cuLoading) return; cuLoading = true; const url = mob() ? cuV.dataset.flyM : cuV.dataset.flyD;
     cuV.addEventListener('loadedmetadata', () => { cuDur = cuV.duration; cuV.currentTime = .5 / CU_FPS; }, { once: true });
-    cuV.addEventListener('seeked', () => cuV.classList.add('is-ready'), { once: true }); };
+    cuV.addEventListener('seeked', () => cuV.classList.add('is-ready'), { once: true });
+    const setSrc = s => { cuV.src = s; cuV.preload = 'auto'; cuV.load(); };
+    fetch(url).then(r => { if (!r.ok) throw 0; return r.blob(); }).then(b => setSrc(URL.createObjectURL(b))).catch(() => setSrc(url)); };
   const cuSeek = p => { cuT = Math.max(0, Math.min(1, p)); };
-  if (motionOn) { new IntersectionObserver((es, ob) => { if (es[0].isIntersecting) { cuLoad(); ob.disconnect(); } }, { rootMargin: '150% 0px' }).observe(yt);
+  if (motionOn) { new IntersectionObserver((es, ob) => { if (es[0].isIntersecting) { cuLoad(); ob.disconnect(); } }, { rootMargin: '400% 0px' }).observe(yt);
     let shown = -1;
     gsap.ticker.add(() => { if (!cuDur) return; const d = cuT - cuF; cuF = Math.abs(d) < .0005 ? cuT : cuF + d * .16;
       const n = Math.round(cuDur * CU_FPS) - 1, fr = Math.round(cuF * n); if (fr === shown || cuV.seeking) return; shown = fr; cuV.currentTime = (fr + .5) / CU_FPS; }); }
