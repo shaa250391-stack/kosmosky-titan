@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Titanium Tongue Drum – KOSMOSKY</title>
+<meta name="description" content="The world's first titanium tongue drum. KOSMOSKY.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/apfel-grotezk@5.2.5/400.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<link rel="stylesheet" href="styles/tokens.css?v=1">
+<link rel="stylesheet" href="styles/site.css?v=6">
+</head>
+<body>
+
+<div class="intro" aria-hidden="true">
+  <div class="intro-box t-ui">
+    <div class="intro-logo"><svg aria-hidden="true" focusable="false" viewBox="0 0 7976 985" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3916.76 21.5352V975.146H3791.36V264.075L3474.41 975.146H3386.21L3067.89 262.692V975.146H2942.48V21.5352L3077.53 21.5352L3430.31 809.772L3783.1 21.5352L3916.76 21.5352Z" fill="currentColor"/>
+<path d="M1181.17 984.998C1092.06 984.998 1010.75 964.094 937.261 922.294C863.759 880.494 805.657 822.159 762.934 747.279C720.217 672.404 698.856 588.11 698.856 494.413C698.856 400.706 720.217 316.412 762.934 241.537C805.652 166.662 863.759 108.327 937.261 66.527C1010.76 24.7273 1092.06 3.82751 1181.17 3.82751C1271.21 3.82751 1352.97 24.7273 1426.47 66.527C1499.96 108.327 1557.84 166.438 1600.1 240.853C1642.36 315.267 1663.49 399.788 1663.49 494.413C1663.49 589.033 1642.36 673.559 1600.1 747.969C1557.84 822.383 1499.96 880.494 1426.47 922.294C1352.97 964.094 1271.21 984.998 1181.17 984.998ZM1181.17 876.125C1248.24 876.125 1308.65 860.507 1362.39 829.276C1416.13 798.041 1458.39 753.484 1489.17 695.605C1519.94 637.726 1535.34 570.662 1535.34 494.413C1535.34 417.236 1519.95 349.944 1489.17 292.527C1458.39 235.109 1416.36 190.785 1363.08 159.55C1309.8 128.314 1249.15 112.696 1181.18 112.696C1113.19 112.696 1052.56 128.314 999.277 159.55C945.985 190.785 903.962 235.109 873.178 292.527C842.403 349.944 827.018 417.236 827.018 494.413C827.018 570.662 842.403 637.731 873.178 695.605C903.962 753.484 946.219 798.041 999.961 829.276C1053.7 860.507 1114.11 876.125 1181.18 876.125H1181.17Z" fill="currentColor"/>
+<path d="M520.903 974.528L125.405 536.311L125.405 974.528H0L0 14.0289L125.405 14.0289L125.405 459.135L522.287 14.0289L680.763 14.0289L245.295 494.963L684.894 974.528L520.903 974.528Z" fill="currentColor"/>
+<path d="M6848.64 972.5L6453.14 534.283V972.5H6327.73V12.0009L6453.14 12.0009V457.107L6850.02 12.0009L7008.49 12.0009L6573.03 492.94L7012.63 972.5L6848.64 972.5Z" fill="currentColor"/>
+<path d="M4570.79 981.166C4481.67 981.166 4400.37 960.261 4326.87 918.462C4253.37 876.662 4195.27 818.327 4152.54 743.452C4109.83 668.576 4088.47 584.283 4088.47 490.585C4088.47 396.878 4109.83 312.585 4152.54 237.709C4195.26 162.834 4253.37 104.499 4326.87 62.6995C4400.37 20.8998 4481.67 0 4570.79 0C4660.82 0 4742.58 20.8998 4816.08 62.6995C4889.58 104.499 4947.45 162.611 4989.71 237.025C5031.98 311.439 5053.11 395.961 5053.11 490.585C5053.11 585.205 5031.98 669.732 4989.71 744.141C4947.46 818.555 4889.58 876.667 4816.08 918.467C4742.58 960.266 4660.82 981.171 4570.79 981.171V981.166ZM4570.79 872.293C4637.86 872.293 4698.26 856.675 4752 825.444C4805.75 794.208 4848.01 749.646 4878.78 691.772C4909.56 633.894 4924.95 566.83 4924.95 490.581C4924.95 413.404 4909.56 346.112 4878.78 288.694C4848.01 231.277 4805.97 186.953 4752.69 155.717C4699.41 124.481 4638.77 108.864 4570.79 108.864C4502.81 108.864 4442.17 124.481 4388.89 155.717C4335.6 186.953 4293.58 231.277 4262.79 288.694C4232.02 346.112 4216.63 413.404 4216.63 490.581C4216.63 566.83 4232.02 633.899 4262.79 691.772C4293.58 749.651 4335.83 794.208 4389.58 825.444C4443.32 856.67 4503.72 872.293 4570.79 872.293H4570.79Z" fill="currentColor"/>
+<path d="M7198.59 970.149V870.516L7822.76 870.516C7835.52 870.516 7845.03 867.307 7851.26 860.894C7857.51 854.461 7860.65 844.641 7860.65 831.459V587.138H7845.3C7840.7 596.482 7834.98 605.791 7828.14 615.041C7820.96 624.742 7812.56 634.388 7802.95 643.945C7793.29 653.542 7782.14 662.227 7769.53 669.959C7756.95 677.671 7742.9 684.451 7727.41 690.288C7711.88 696.136 7694.37 700.52 7674.92 703.431C7655.49 706.337 7403.09 707.796 7379.72 707.796C7354.9 707.796 7331.04 705.107 7308.17 699.746C7285.29 694.385 7263.41 686.33 7242.53 675.603C7221.63 664.86 7202.93 651.534 7186.47 635.638C7170.03 619.762 7155.8 601.298 7143.83 580.289C7119.89 538.286 7107.91 487.003 7107.91 426.471V12.0058L7223.26 12.0058V418.154C7223.26 451.165 7227.46 479.668 7235.84 503.653C7244.18 527.509 7256.68 546.93 7273.33 561.894C7290.03 576.906 7309.68 588.18 7332.24 595.688C7354.85 603.222 7611.44 606.991 7640.01 606.991C7672.24 606.991 7701.58 601.739 7728 591.23C7754.38 580.735 7777.93 564.973 7798.61 543.96C7819.26 522.985 7834.76 496.848 7845.09 465.558C7855.46 434.159 7860.66 397.547 7860.66 355.737V12.0009L7976 12.0009V850.866C7976 869.643 7973.34 886.471 7968 901.305C7962.65 916.214 7954.6 929.124 7943.87 940.025C7933.15 950.931 7919.95 959.114 7904.34 964.565C7888.84 969.981 7870.93 972.694 7850.66 972.694L7198.59 972.694V970.14L7198.59 970.149Z" fill="currentColor"/>
+<path d="M2559.73 126.778L2375.12 126.778L1988.12 126.778C1960.01 126.778 1911.86 138.41 1893.27 157.152C1874.67 175.894 1863.13 201.71 1863.13 230.044L1863.13 229.696C1863.13 258.03 1874.67 283.847 1893.27 302.588C1911.86 321.33 1960.01 332.963 1988.12 332.963L2375.12 332.963L2559.73 332.963L2764.57 332.963L2764.57 446.536L1988.12 446.536C1928.9 446.536 1875.08 422.148 1836.14 382.861C1797.16 343.575 1773 289.357 1773 229.662L1773 230.01C1773 170.316 1797.2 116.063 1836.14 76.8111C1875.11 37.5249 1928.9 13.1368 1988.12 13.1368L2764.57 13.1368L2764.57 126.71L2559.73 126.71L2559.73 126.778Z" fill="currentColor"/>
+<path d="M5950.76 126.778L5766.15 126.778L5379.15 126.778C5351.04 126.778 5302.89 138.41 5284.29 157.152C5265.7 175.894 5254.16 201.71 5254.16 230.044L5254.16 229.696C5254.16 258.03 5265.7 283.847 5284.29 302.588C5302.89 321.33 5351.04 332.963 5379.15 332.963L5766.15 332.963L5950.76 332.963L6155.59 332.963L6155.59 446.536L5379.15 446.536C5319.93 446.536 5266.11 422.148 5227.16 382.861C5188.19 343.575 5164.03 289.357 5164.03 229.662L5164.03 230.01C5164.03 170.316 5188.22 116.063 5227.16 76.8111C5266.14 37.5249 5319.93 13.1368 5379.15 13.1368L6155.59 13.1368L6155.59 126.71L5950.76 126.71L5950.76 126.778Z" fill="currentColor"/>
+<path d="M2018.59 652.105L2204.43 652.105L2593.99 652.105C2622.29 652.105 2670.76 663.738 2689.47 682.48C2708.19 701.221 2719.81 727.038 2719.81 755.372L2719.81 755.024C2719.81 783.357 2708.19 809.174 2689.47 827.916C2670.76 846.658 2622.29 858.29 2593.99 858.29L2204.43 858.29L2018.59 858.29L1812.4 858.29L1812.4 971.863L2593.99 971.863C2653.6 971.863 2707.78 947.475 2746.98 908.189C2786.21 868.903 2810.53 814.684 2810.53 754.99L2810.53 755.338C2810.53 695.643 2786.18 641.391 2746.98 602.138C2707.75 562.852 2653.6 538.464 2593.99 538.464L1812.4 538.464L1812.4 652.037L2018.59 652.037L2018.59 652.105Z" fill="currentColor"/>
+<path d="M5409.62 652.105L5595.46 652.105L5985.02 652.105C6013.31 652.105 6061.79 663.738 6080.5 682.48C6099.22 701.221 6110.83 727.038 6110.83 755.372L6110.83 755.024C6110.83 783.357 6099.22 809.174 6080.5 827.916C6061.79 846.658 6013.31 858.29 5985.02 858.29L5595.46 858.29L5409.62 858.29L5203.43 858.29L5203.43 971.863L5985.02 971.863C6044.63 971.863 6098.81 947.475 6138.01 908.189C6177.24 868.903 6201.56 814.684 6201.56 754.99L6201.56 755.338C6201.56 695.643 6177.21 641.391 6138.01 602.138C6098.78 562.852 6044.63 538.464 5985.02 538.464L5203.43 538.464L5203.43 652.037L5409.62 652.037L5409.62 652.105Z" fill="currentColor"/>
+</svg><span class="intro-count">000</span></div>
+    <button type="button" data-enter="sound">Enter with sound</button>
+    <button type="button" data-enter="mute">Enter muted</button>
+  </div>
+  <div class="intro-bar" aria-hidden="true"><i></i></div>
+</div>
+
+<div class="cursor t-small" aria-hidden="true"><i></i><span class="cursor-label">Sound on</span></div>
+
+<header class="topbar"><div class="topbar-grid">
+    <a class="cell c-logo" href="#hero" aria-label="KOSMOSKY"><span class="in"><svg aria-hidden="true" focusable="false" viewBox="0 0 7976 985" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3916.76 21.5352V975.146H3791.36V264.075L3474.41 975.146H3386.21L3067.89 262.692V975.146H2942.48V21.5352L3077.53 21.5352L3430.31 809.772L3783.1 21.5352L3916.76 21.5352Z" fill="currentColor"/>
+<path d="M1181.17 984.998C1092.06 984.998 1010.75 964.094 937.261 922.294C863.759 880.494 805.657 822.159 762.934 747.279C720.217 672.404 698.856 588.11 698.856 494.413C698.856 400.706 720.217 316.412 762.934 241.537C805.652 166.662 863.759 108.327 937.261 66.527C1010.76 24.7273 1092.06 3.82751 1181.17 3.82751C1271.21 3.82751 1352.97 24.7273 1426.47 66.527C1499.96 108.327 1557.84 166.438 1600.1 240.853C1642.36 315.267 1663.49 399.788 1663.49 494.413C1663.49 589.033 1642.36 673.559 1600.1 747.969C1557.84 822.383 1499.96 880.494 1426.47 922.294C1352.97 964.094 1271.21 984.998 1181.17 984.998ZM1181.17 876.125C1248.24 876.125 1308.65 860.507 1362.39 829.276C1416.13 798.041 1458.39 753.484 1489.17 695.605C1519.94 637.726 1535.34 570.662 1535.34 494.413C1535.34 417.236 1519.95 349.944 1489.17 292.527C1458.39 235.109 1416.36 190.785 1363.08 159.55C1309.8 128.314 1249.15 112.696 1181.18 112.696C1113.19 112.696 1052.56 128.314 999.277 159.55C945.985 190.785 903.962 235.109 873.178 292.527C842.403 349.944 827.018 417.236 827.018 494.413C827.018 570.662 842.403 637.731 873.178 695.605C903.962 753.484 946.219 798.041 999.961 829.276C1053.7 860.507 1114.11 876.125 1181.18 876.125H1181.17Z" fill="currentColor"/>
+<path d="M520.903 974.528L125.405 536.311L125.405 974.528H0L0 14.0289L125.405 14.0289L125.405 459.135L522.287 14.0289L680.763 14.0289L245.295 494.963L684.894 974.528L520.903 974.528Z" fill="currentColor"/>
+<path d="M6848.64 972.5L6453.14 534.283V972.5H6327.73V12.0009L6453.14 12.0009V457.107L6850.02 12.0009L7008.49 12.0009L6573.03 492.94L7012.63 972.5L6848.64 972.5Z" fill="currentColor"/>
+<path d="M4570.79 981.166C4481.67 981.166 4400.37 960.261 4326.87 918.462C4253.37 876.662 4195.27 818.327 4152.54 743.452C4109.83 668.576 4088.47 584.283 4088.47 490.585C4088.47 396.878 4109.83 312.585 4152.54 237.709C4195.26 162.834 4253.37 104.499 4326.87 62.6995C4400.37 20.8998 4481.67 0 4570.79 0C4660.82 0 4742.58 20.8998 4816.08 62.6995C4889.58 104.499 4947.45 162.611 4989.71 237.025C5031.98 311.439 5053.11 395.961 5053.11 490.585C5053.11 585.205 5031.98 669.732 4989.71 744.141C4947.46 818.555 4889.58 876.667 4816.08 918.467C4742.58 960.266 4660.82 981.171 4570.79 981.171V981.166ZM4570.79 872.293C4637.86 872.293 4698.26 856.675 4752 825.444C4805.75 794.208 4848.01 749.646 4878.78 691.772C4909.56 633.894 4924.95 566.83 4924.95 490.581C4924.95 413.404 4909.56 346.112 4878.78 288.694C4848.01 231.277 4805.97 186.953 4752.69 155.717C4699.41 124.481 4638.77 108.864 4570.79 108.864C4502.81 108.864 4442.17 124.481 4388.89 155.717C4335.6 186.953 4293.58 231.277 4262.79 288.694C4232.02 346.112 4216.63 413.404 4216.63 490.581C4216.63 566.83 4232.02 633.899 4262.79 691.772C4293.58 749.651 4335.83 794.208 4389.58 825.444C4443.32 856.67 4503.72 872.293 4570.79 872.293H4570.79Z" fill="currentColor"/>
+<path d="M7198.59 970.149V870.516L7822.76 870.516C7835.52 870.516 7845.03 867.307 7851.26 860.894C7857.51 854.461 7860.65 844.641 7860.65 831.459V587.138H7845.3C7840.7 596.482 7834.98 605.791 7828.14 615.041C7820.96 624.742 7812.56 634.388 7802.95 643.945C7793.29 653.542 7782.14 662.227 7769.53 669.959C7756.95 677.671 7742.9 684.451 7727.41 690.288C7711.88 696.136 7694.37 700.52 7674.92 703.431C7655.49 706.337 7403.09 707.796 7379.72 707.796C7354.9 707.796 7331.04 705.107 7308.17 699.746C7285.29 694.385 7263.41 686.33 7242.53 675.603C7221.63 664.86 7202.93 651.534 7186.47 635.638C7170.03 619.762 7155.8 601.298 7143.83 580.289C7119.89 538.286 7107.91 487.003 7107.91 426.471V12.0058L7223.26 12.0058V418.154C7223.26 451.165 7227.46 479.668 7235.84 503.653C7244.18 527.509 7256.68 546.93 7273.33 561.894C7290.03 576.906 7309.68 588.18 7332.24 595.688C7354.85 603.222 7611.44 606.991 7640.01 606.991C7672.24 606.991 7701.58 601.739 7728 591.23C7754.38 580.735 7777.93 564.973 7798.61 543.96C7819.26 522.985 7834.76 496.848 7845.09 465.558C7855.46 434.159 7860.66 397.547 7860.66 355.737V12.0009L7976 12.0009V850.866C7976 869.643 7973.34 886.471 7968 901.305C7962.65 916.214 7954.6 929.124 7943.87 940.025C7933.15 950.931 7919.95 959.114 7904.34 964.565C7888.84 969.981 7870.93 972.694 7850.66 972.694L7198.59 972.694V970.14L7198.59 970.149Z" fill="currentColor"/>
+<path d="M2559.73 126.778L2375.12 126.778L1988.12 126.778C1960.01 126.778 1911.86 138.41 1893.27 157.152C1874.67 175.894 1863.13 201.71 1863.13 230.044L1863.13 229.696C1863.13 258.03 1874.67 283.847 1893.27 302.588C1911.86 321.33 1960.01 332.963 1988.12 332.963L2375.12 332.963L2559.73 332.963L2764.57 332.963L2764.57 446.536L1988.12 446.536C1928.9 446.536 1875.08 422.148 1836.14 382.861C1797.16 343.575 1773 289.357 1773 229.662L1773 230.01C1773 170.316 1797.2 116.063 1836.14 76.8111C1875.11 37.5249 1928.9 13.1368 1988.12 13.1368L2764.57 13.1368L2764.57 126.71L2559.73 126.71L2559.73 126.778Z" fill="currentColor"/>
+<path d="M5950.76 126.778L5766.15 126.778L5379.15 126.778C5351.04 126.778 5302.89 138.41 5284.29 157.152C5265.7 175.894 5254.16 201.71 5254.16 230.044L5254.16 229.696C5254.16 258.03 5265.7 283.847 5284.29 302.588C5302.89 321.33 5351.04 332.963 5379.15 332.963L5766.15 332.963L5950.76 332.963L6155.59 332.963L6155.59 446.536L5379.15 446.536C5319.93 446.536 5266.11 422.148 5227.16 382.861C5188.19 343.575 5164.03 289.357 5164.03 229.662L5164.03 230.01C5164.03 170.316 5188.22 116.063 5227.16 76.8111C5266.14 37.5249 5319.93 13.1368 5379.15 13.1368L6155.59 13.1368L6155.59 126.71L5950.76 126.71L5950.76 126.778Z" fill="currentColor"/>
+<path d="M2018.59 652.105L2204.43 652.105L2593.99 652.105C2622.29 652.105 2670.76 663.738 2689.47 682.48C2708.19 701.221 2719.81 727.038 2719.81 755.372L2719.81 755.024C2719.81 783.357 2708.19 809.174 2689.47 827.916C2670.76 846.658 2622.29 858.29 2593.99 858.29L2204.43 858.29L2018.59 858.29L1812.4 858.29L1812.4 971.863L2593.99 971.863C2653.6 971.863 2707.78 947.475 2746.98 908.189C2786.21 868.903 2810.53 814.684 2810.53 754.99L2810.53 755.338C2810.53 695.643 2786.18 641.391 2746.98 602.138C2707.75 562.852 2653.6 538.464 2593.99 538.464L1812.4 538.464L1812.4 652.037L2018.59 652.037L2018.59 652.105Z" fill="currentColor"/>
+<path d="M5409.62 652.105L5595.46 652.105L5985.02 652.105C6013.31 652.105 6061.79 663.738 6080.5 682.48C6099.22 701.221 6110.83 727.038 6110.83 755.372L6110.83 755.024C6110.83 783.357 6099.22 809.174 6080.5 827.916C6061.79 846.658 6013.31 858.29 5985.02 858.29L5595.46 858.29L5409.62 858.29L5203.43 858.29L5203.43 971.863L5985.02 971.863C6044.63 971.863 6098.81 947.475 6138.01 908.189C6177.24 868.903 6201.56 814.684 6201.56 754.99L6201.56 755.338C6201.56 695.643 6177.21 641.391 6138.01 602.138C6098.78 562.852 6044.63 538.464 5985.02 538.464L5203.43 538.464L5203.43 652.037L5409.62 652.037L5409.62 652.105Z" fill="currentColor"/>
+</svg></span></a>
+    <div class="cell c-tag t-ui"><span class="in">Titanium tongue drum</span></div>
+    <div class="cell c-lang t-ui" role="group" aria-label="Language">
+      <button type="button" aria-disabled="true" title="Russian version – next step"><span class="in">RU</span></button>
+      <button type="button" aria-current="true"><span class="in">EN</span></button>
+    </div>
+    <button class="cell c-sound t-ui" type="button" aria-pressed="false" aria-label="Turn sound on"><span class="lbl in">Sound</span><span class="bars in" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
+    <a class="cell c-order t-ui" href="https://kosmosky.example/titan" target="_blank" rel="noopener"><span class="in">Order</span><span class="arr in" aria-hidden="true">↗</span></a>
+</div></header>
+
+<main>
+<section id="hero" class="hero">
+  <div class="grid">
+
+    <div class="cell c-title">
+      <div class="c-title-top t-small"><span class="in">01</span><span class="in">Titanium</span></div>
+      <h1 class="hero-title t-hero">We created<br class="d"> the&nbsp;world’s first<br class="d"> titanium tongue drum</h1>
+    </div>
+
+    <div class="cell c-video">
+      <video src="assets/video/d-play.mp4" poster="assets/img/d-play.jpg" autoplay muted loop playsinline preload="auto"></video>
+      <div class="v-cap t-small"><span class="v-dot in">Click to&nbsp;listen</span></div>
+    </div>
+
+    <div class="cell c-lattice" id="lattice">
+      <canvas aria-hidden="true"></canvas>
+      <span class="lat-tag t-small in">Crystal lattice</span>
+      <div class="lat-cap t-small in"><b>Titanium, hexagonal close-packed</b><span>a&nbsp;= 2.95&nbsp;Å, c&nbsp;= 4.68&nbsp;Å</span></div>
+    </div>
+
+    <div class="cell c-specs">
+      <p class="sub t-body in">Nine months of&nbsp;experiments, plenty of&nbsp;unexpected challenges, and&nbsp;here’s what we made.</p>
+      <ul class="specs t-small">
+        <li><span class="k in">Material</span><span class="lead"></span><span class="v in">Titanium</span></li>
+        <li><span class="k in">Weight vs.&nbsp;steel</span><span class="lead"></span><span class="v in">~42.5% lighter</span></li>
+        <li><span class="k in">Coating</span><span class="lead"></span><span class="v in">None needed</span></li>
+        <li><span class="k in">Development</span><span class="lead"></span><span class="v in">9&nbsp;months</span></li>
+        <li><span class="k in">Participants</span><span class="lead"></span><span class="v in">45</span></li>
+        <li><span class="k in">Countries</span><span class="lead"></span><span class="v in">10</span></li>
+      </ul>
+    </div>
+
+    <div class="cell c-marquee t-ui" aria-label="Our path">
+      <div class="track-row"><span>Sourced a&nbsp;rare grade of&nbsp;titanium sheet</span><span>Formed the&nbsp;bowls from a&nbsp;flat sheet</span><span>Cut and&nbsp;tuned the&nbsp;tongues</span><span>Polished, fired, joined the&nbsp;halves</span><span>Final tuning</span><span>Prize draw for&nbsp;participants</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="community" class="block">
+  <div class="grid-2">
+    <div class="cell c-band">
+      <div class="band-frame"><img src="assets/img/d-laser-hq.webp" alt="A fibre laser cutting a titanium sheet in the workshop" width="1672" height="941" loading="lazy"></div>
+      <div class="band-cap">
+        <div class="cell-top t-small"><span>02</span><span>Laser cutting</span></div>
+        <p class="band-title t-big">Cut and&nbsp;tuned the&nbsp;tongues</p>
+      </div>
+    </div>
+
+    <div class="cell c-state">
+      <div class="cell-top t-small"><span>Community</span><span>The&nbsp;experiment</span></div>
+      <p class="manifest t-big">We invited our followers to&nbsp;join an&nbsp;unusual experiment: building a&nbsp;tongue drum from a&nbsp;material we had never worked with before.</p>
+    </div>
+
+    <div class="cell c-tune">
+      <img src="assets/img/d-shelf.webp" alt="A bowl with the tongues cut out, in the workshop" width="1000" height="1500" loading="lazy">
+      <div class="tune-cap t-small"><span>In&nbsp;the&nbsp;workshop</span></div>
+    </div>
+
+    <div class="cell c-num c-45" id="numbers" aria-hidden="true">
+      <div class="cell-top t-small"><span>Participants</span></div>
+      <span class="t-num">45</span>
+      <span class="viz sq"></span>
+    </div>
+    <div class="cell c-num c-10" aria-hidden="true">
+      <div class="cell-top t-small"><span>Countries</span></div>
+      <span class="t-num">10</span>
+      <span class="viz br"></span>
+    </div>
+
+    <div class="cell c-joined">
+      <h2 class="t-mid">45&nbsp;people from 10&nbsp;countries joined us.</h2>
+      <p class="t-body">Participants helped make decisions at&nbsp;every stage.</p>
+    </div>
+  </div>
+</section>
+
+<section id="money" class="block">
+  <div class="grid-3">
+    <div class="cell c-photo">
+      <img src="assets/img/c-gold.webp" alt="A titanium bowl blank with the tongues marked out, in the workshop" width="2400" height="1600" loading="lazy">
+      <span class="photo-cap t-small">From the&nbsp;workshop</span>
+    </div>
+    <div class="cell c-sum">
+      <div class="cell-top t-small"><span>03</span><span>Funding</span></div>
+      <p class="sum" aria-label="$1,900"></p>
+      <p class="sum-cap t-big">That’s how much we raised to&nbsp;make the&nbsp;experiment happen.</p>
+    </div>
+    <div class="cell c-knew">
+      <div class="cell-top t-small"><span>Risk</span></div>
+      <p class="t-mid">People joined knowing it was an&nbsp;experiment and&nbsp;that it might not work out.</p>
+    </div>
+    <div class="cell c-trust">
+      <div class="cell-top t-small"><span>Trust</span></div>
+      <p class="t-mid">That trust means a&nbsp;great deal to&nbsp;us.</p>
+    </div>
+  </div>
+</section>
+
+<section id="path" class="block path">
+  <div class="path-pin">
+    <div class="path-track">
+      <div class="p-cell p-intro">
+        <div class="cell-top t-small"><span>04</span><span>The&nbsp;path</span></div>
+        <p class="t-big">A&nbsp;short account of&nbsp;the&nbsp;path we took.</p>
+        <p class="p-hint t-small"><i></i>Keep scrolling</p>
+      </div>
+      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-1.webp" alt="A titanium sheet on the laser cutting bed" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">01</span><p class="t-body">Sourced and&nbsp;ordered a&nbsp;sheet of&nbsp;a&nbsp;rare grade of&nbsp;titanium that we needed.</p></div></div>
+      <div class="p-cell p-stage p-explode"><div class="p-photo"><img src="assets/img/d-path-2.webp" alt="Bowls being formed from a flat sheet" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">02</span><p class="t-body">Formed the&nbsp;bowls from a&nbsp;flat sheet.</p><p class="boom t-small">The&nbsp;first bowl exploded&nbsp;💥</p></div></div>
+      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-3.webp" alt="The laser cutting the tongues into the bowl" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">03</span><p class="t-body">Cut the&nbsp;tongues and&nbsp;tuned them to&nbsp;notes with overtones.</p></div></div>
+      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-4.webp" alt="Joining the two halves of the drum" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">04</span><p class="t-body">Polished, fired in&nbsp;the&nbsp;kiln and&nbsp;joined the&nbsp;halves.</p></div></div>
+      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-5.webp" alt="The maker fine-tuning the titanium drum" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">05</span><p class="t-body">Fine-tuned to&nbsp;perfection.</p></div></div>
+      <div class="p-cell p-draw">
+        <div class="cell-top t-small"><span>Final stage</span></div>
+        <span class="p-num">06</span>
+        <p class="t-mid">Held a&nbsp;prize draw among the&nbsp;participants.</p>
+      </div>
+      <div class="p-cell p-end">
+        <div class="cell-top t-small"><span>Instagram</span></div>
+        <p class="t-mid">Videos of&nbsp;every stage are in&nbsp;our “Titan” Instagram highlights.</p>
+      </div>
+    </div>
+    <div class="p-bar" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<section id="done" class="block">
+  <div class="grid-5">
+    <div class="cell c-done">
+      <div class="cell-top t-small"><span>05</span><span>Available to&nbsp;order</span></div>
+      <h2 class="t-done">We did it!</h2>
+      <p class="t-mid">The&nbsp;titanium tongue drum is now available to&nbsp;order.</p>
+    </div>
+    <div class="cell c-portrait">
+      <img src="assets/img/d-hero.webp" alt="A man holding the titanium tongue drum against a dark background" width="1200" height="1800" loading="lazy">
+      <span class="portrait-cap t-small">The&nbsp;titanium tongue drum</span>
+    </div>
+    <div class="cell c-listen">
+      <button class="listen" type="button" aria-pressed="false" aria-label="Play the sound of the titanium tongue drum"><span class="ic" aria-hidden="true"></span></button>
+      <p class="t-mid">Listen to&nbsp;how it sounds!</p>
+    </div>
+    <div class="cell c-wave">
+      <canvas aria-hidden="true"></canvas>
+      <div class="cell-top t-small"><span>Sound</span><span class="wave-state">Muted</span></div>
+    </div>
+    <a class="cell c-cta" href="https://kosmosky.example/titan" target="_blank" rel="noopener"><span class="t-big">Order</span><span class="t-big" aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
+<section id="rare" class="rare">
+  <div class="rare-stage">
+    <canvas aria-hidden="true"></canvas>
+    <div class="rare-tag t-small" aria-hidden="true"><span>06</span><span>Made by&nbsp;hand</span></div>
+    <div class="rare-calls t-small" aria-hidden="true">
+      <span class="call r" data-a="shell"><small>01</small>Titanium shell</span>
+      <span class="call l" data-a="tongue"><small>02</small>Tongues cut and&nbsp;tuned by&nbsp;hand</span>
+      <span class="call r hide-m" data-a="seam"><small>03</small>Two halves, joined</span>
+    </div>
+    <div class="rare-text">
+      <h2 class="t-big">Titanium instruments will never be mass-produced.</h2>
+      <p class="t-body">The&nbsp;material is very expensive, and&nbsp;every instrument takes complex processing and&nbsp;a&nbsp;lot of&nbsp;handwork.</p>
+    </div>
+  </div>
+</section>
+
+<section id="price" class="block light">
+  <div class="grid-6">
+    <div class="cell c-q">
+      <div class="cell-top t-small"><span>07</span><span>The&nbsp;price</span></div>
+      <h2 class="t-done">Expensive?</h2>
+      <div class="answer"><p class="t-mid">Of&nbsp;course it is.</p><p class="t-mid">But the&nbsp;result is worth it.</p></div>
+    </div>
+    <div class="cell c-arg">
+      <div class="cell-top t-small"><span>Sound</span><span>Steel / Titanium</span></div>
+      <svg class="sound-svg" viewBox="0 0 300 130" aria-hidden="true">
+        <line x1="52" y1="32" x2="300" y2="32" stroke="rgba(236,234,229,.16)"/>
+        <line x1="52" y1="98" x2="300" y2="98" stroke="rgba(236,234,229,.16)"/>
+        <path class="w-steel" fill="none" stroke="#8B8D96" stroke-width="1.2"/>
+        <path class="w-ti" fill="none" stroke="#6F8BFF" stroke-width="1.6"/>
+        <text x="0" y="35" fill="#8B8D96" font-size="10" font-family="Geist, sans-serif">Steel</text>
+        <text x="0" y="101" fill="#6F8BFF" font-size="10" font-family="Geist, sans-serif">Titanium</text>
+      </svg>
+      <p class="arg-k">Sound</p>
+      <p class="t-body">Brighter, richer and&nbsp;deeper than steel instruments.</p>
+    </div>
+    <div class="cell c-arg">
+      <div class="cell-top t-small"><span>Weight</span><span>vs.&nbsp;steel</span></div>
+      <div class="wt" aria-hidden="true">
+        <div class="wt-row t-small"><span>Steel</span><span class="bar"><i></i></span><span class="val">100%</span></div>
+        <div class="wt-row ti t-small"><span>Titanium</span><span class="bar"><i></i></span><span class="val">57.5%</span></div>
+        <span class="wt-delta">−42.5%</span>
+      </div>
+      <p class="arg-k">Weight</p>
+      <p class="t-body">Titanium is about 42.5% lighter than steel.</p>
+    </div>
+    <div class="cell c-arg">
+      <div class="cell-top t-small"><span>Corrosion resistance</span><span>No&nbsp;coating</span></div>
+      <svg viewBox="0 0 300 130" aria-hidden="true">
+        <line x1="20" y1="40" x2="290" y2="128" stroke="currentColor" stroke-width="1.2"/>
+        <g class="drop"><path d="M40 20 C40 20 31 33 31 38 a9 9 0 0 0 18 0 C49 33 40 20 40 20 Z" fill="#6F8BFF"/></g>
+        <text x="20" y="20" fill="#8B8D96" font-size="10" font-family="Geist, sans-serif">Moisture</text>
+      </svg>
+      <p class="arg-k">Corrosion resistance</p>
+      <p class="t-body">Titanium resists moisture and&nbsp;needs no&nbsp;paint or&nbsp;varnish.</p>
+    </div>
+  </div>
+</section>
+
+<section id="closeup" class="block light closeup">
+  <div class="cu-stage">
+    <div class="cu-frame">
+      <img class="cu-poster" src="assets/img/d-fly-poster.webp" alt="The camera glides low over the titanium tongues" width="1920" height="1080" loading="lazy">
+      <video muted playsinline preload="none" aria-hidden="true" data-fly-d="assets/video/fly-d.mp4" data-fly-m="assets/video/fly-m.mp4"></video>
+    </div>
+    <div class="cu-cap">
+      <div class="cell-top t-small"><span>08</span><span>Close-up</span></div>
+      <div class="cu-bottom">
+        <p class="cu-title t-big">Every tongue, up&nbsp;close</p>
+        <button class="cu-yt t-ui" type="button" aria-label="Play the full video review on YouTube"><i aria-hidden="true"></i><span>Watch the&nbsp;full video review<small class="t-small">YouTube</small></span></button>
+      </div>
+    </div>
+    <div class="cu-bar" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<section id="models" class="block light models">
+  <div class="mstage">
+    <canvas class="mlat" aria-hidden="true"></canvas>
+    <div class="mhead">
+      <div class="cell-top t-small"><span>09</span><span>Models</span></div>
+      <h2 class="t-big">Four models to&nbsp;choose from.</h2>
+      <p class="t-small">Prices valid for&nbsp;November and&nbsp;December 2026.</p>
+    </div>
+  </div>
+</section>
+<section id="follow" class="block light">
+  <div class="grid-9">
+    <div class="cell c-follow">
+      <div class="cell-top t-small"><span>10</span><span>Follow us</span></div>
+      <h2 class="t-done">Follow us</h2>
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <p class="t-mid">Here we talk about the&nbsp;instruments we make ourselves and&nbsp;show what happens behind the&nbsp;scenes in&nbsp;our workshop.</p>
+        <div class="acts"><a class="chip-l" href="https://kosmosky.example/instagram" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a><a class="chip-l chip-o" href="https://youtu.be/8kx-ayJBvc8" target="_blank" rel="noopener">YouTube <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </div>
+    <div class="cell c-bts1"><img src="assets/img/d-bts-1.webp" alt="The maker working on a bowl at the bench" loading="lazy"><span class="bts-cap t-small">Behind the&nbsp;scenes</span></div>
+    <div class="cell c-bts2"><img src="assets/img/d-bts-2.webp" alt="Finished bowls lined up along the workshop wall" loading="lazy"><span class="bts-cap t-small">In&nbsp;the&nbsp;workshop</span></div>
+    <div class="cell c-teaser">
+      <img src="assets/img/d-teaser.webp" alt="" aria-hidden="true">
+      <div class="cell-top t-small"><span>Next experiment</span><span>Soon</span></div>
+      <span class="q" aria-hidden="true">?</span>
+      <p class="t-body">Soon we will show our new experiment: a&nbsp;tongue drum made from a&nbsp;new material.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer" id="footer">
+  <div class="f-contacts t-small">
+    <span class="f-h">Contacts</span>
+    <div class="f-col"><span>Orders and&nbsp;advice</span><a href="mailto:info@kosmosky.com">info@kosmosky.com</a></div>
+    <div class="f-col"><span>Partnership</span><a href="mailto:partners@kosmosky.com">partners@kosmosky.com</a></div>
+    <div class="f-col"><span>Manager</span><a href="tel:+79992206072">+7&nbsp;999&nbsp;220&nbsp;60&nbsp;72</a></div>
+    <div class="f-col"><span>Messengers</span><a href="tel:+79532737973">+7&nbsp;953&nbsp;273&nbsp;79&nbsp;73</a></div>
+  </div>
+  <div class="f-bottom">
+  <a class="f-logo" href="#hero" aria-label="KOSMOSKY, back to top"><svg aria-hidden="true" focusable="false" viewBox="0 0 7976 985" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3916.76 21.5352V975.146H3791.36V264.075L3474.41 975.146H3386.21L3067.89 262.692V975.146H2942.48V21.5352L3077.53 21.5352L3430.31 809.772L3783.1 21.5352L3916.76 21.5352Z" fill="currentColor"/>
+<path d="M1181.17 984.998C1092.06 984.998 1010.75 964.094 937.261 922.294C863.759 880.494 805.657 822.159 762.934 747.279C720.217 672.404 698.856 588.11 698.856 494.413C698.856 400.706 720.217 316.412 762.934 241.537C805.652 166.662 863.759 108.327 937.261 66.527C1010.76 24.7273 1092.06 3.82751 1181.17 3.82751C1271.21 3.82751 1352.97 24.7273 1426.47 66.527C1499.96 108.327 1557.84 166.438 1600.1 240.853C1642.36 315.267 1663.49 399.788 1663.49 494.413C1663.49 589.033 1642.36 673.559 1600.1 747.969C1557.84 822.383 1499.96 880.494 1426.47 922.294C1352.97 964.094 1271.21 984.998 1181.17 984.998ZM1181.17 876.125C1248.24 876.125 1308.65 860.507 1362.39 829.276C1416.13 798.041 1458.39 753.484 1489.17 695.605C1519.94 637.726 1535.34 570.662 1535.34 494.413C1535.34 417.236 1519.95 349.944 1489.17 292.527C1458.39 235.109 1416.36 190.785 1363.08 159.55C1309.8 128.314 1249.15 112.696 1181.18 112.696C1113.19 112.696 1052.56 128.314 999.277 159.55C945.985 190.785 903.962 235.109 873.178 292.527C842.403 349.944 827.018 417.236 827.018 494.413C827.018 570.662 842.403 637.731 873.178 695.605C903.962 753.484 946.219 798.041 999.961 829.276C1053.7 860.507 1114.11 876.125 1181.18 876.125H1181.17Z" fill="currentColor"/>
+<path d="M520.903 974.528L125.405 536.311L125.405 974.528H0L0 14.0289L125.405 14.0289L125.405 459.135L522.287 14.0289L680.763 14.0289L245.295 494.963L684.894 974.528L520.903 974.528Z" fill="currentColor"/>
+<path d="M6848.64 972.5L6453.14 534.283V972.5H6327.73V12.0009L6453.14 12.0009V457.107L6850.02 12.0009L7008.49 12.0009L6573.03 492.94L7012.63 972.5L6848.64 972.5Z" fill="currentColor"/>
+<path d="M4570.79 981.166C4481.67 981.166 4400.37 960.261 4326.87 918.462C4253.37 876.662 4195.27 818.327 4152.54 743.452C4109.83 668.576 4088.47 584.283 4088.47 490.585C4088.47 396.878 4109.83 312.585 4152.54 237.709C4195.26 162.834 4253.37 104.499 4326.87 62.6995C4400.37 20.8998 4481.67 0 4570.79 0C4660.82 0 4742.58 20.8998 4816.08 62.6995C4889.58 104.499 4947.45 162.611 4989.71 237.025C5031.98 311.439 5053.11 395.961 5053.11 490.585C5053.11 585.205 5031.98 669.732 4989.71 744.141C4947.46 818.555 4889.58 876.667 4816.08 918.467C4742.58 960.266 4660.82 981.171 4570.79 981.171V981.166ZM4570.79 872.293C4637.86 872.293 4698.26 856.675 4752 825.444C4805.75 794.208 4848.01 749.646 4878.78 691.772C4909.56 633.894 4924.95 566.83 4924.95 490.581C4924.95 413.404 4909.56 346.112 4878.78 288.694C4848.01 231.277 4805.97 186.953 4752.69 155.717C4699.41 124.481 4638.77 108.864 4570.79 108.864C4502.81 108.864 4442.17 124.481 4388.89 155.717C4335.6 186.953 4293.58 231.277 4262.79 288.694C4232.02 346.112 4216.63 413.404 4216.63 490.581C4216.63 566.83 4232.02 633.899 4262.79 691.772C4293.58 749.651 4335.83 794.208 4389.58 825.444C4443.32 856.67 4503.72 872.293 4570.79 872.293H4570.79Z" fill="currentColor"/>
+<path d="M7198.59 970.149V870.516L7822.76 870.516C7835.52 870.516 7845.03 867.307 7851.26 860.894C7857.51 854.461 7860.65 844.641 7860.65 831.459V587.138H7845.3C7840.7 596.482 7834.98 605.791 7828.14 615.041C7820.96 624.742 7812.56 634.388 7802.95 643.945C7793.29 653.542 7782.14 662.227 7769.53 669.959C7756.95 677.671 7742.9 684.451 7727.41 690.288C7711.88 696.136 7694.37 700.52 7674.92 703.431C7655.49 706.337 7403.09 707.796 7379.72 707.796C7354.9 707.796 7331.04 705.107 7308.17 699.746C7285.29 694.385 7263.41 686.33 7242.53 675.603C7221.63 664.86 7202.93 651.534 7186.47 635.638C7170.03 619.762 7155.8 601.298 7143.83 580.289C7119.89 538.286 7107.91 487.003 7107.91 426.471V12.0058L7223.26 12.0058V418.154C7223.26 451.165 7227.46 479.668 7235.84 503.653C7244.18 527.509 7256.68 546.93 7273.33 561.894C7290.03 576.906 7309.68 588.18 7332.24 595.688C7354.85 603.222 7611.44 606.991 7640.01 606.991C7672.24 606.991 7701.58 601.739 7728 591.23C7754.38 580.735 7777.93 564.973 7798.61 543.96C7819.26 522.985 7834.76 496.848 7845.09 465.558C7855.46 434.159 7860.66 397.547 7860.66 355.737V12.0009L7976 12.0009V850.866C7976 869.643 7973.34 886.471 7968 901.305C7962.65 916.214 7954.6 929.124 7943.87 940.025C7933.15 950.931 7919.95 959.114 7904.34 964.565C7888.84 969.981 7870.93 972.694 7850.66 972.694L7198.59 972.694V970.14L7198.59 970.149Z" fill="currentColor"/>
+<path d="M2559.73 126.778L2375.12 126.778L1988.12 126.778C1960.01 126.778 1911.86 138.41 1893.27 157.152C1874.67 175.894 1863.13 201.71 1863.13 230.044L1863.13 229.696C1863.13 258.03 1874.67 283.847 1893.27 302.588C1911.86 321.33 1960.01 332.963 1988.12 332.963L2375.12 332.963L2559.73 332.963L2764.57 332.963L2764.57 446.536L1988.12 446.536C1928.9 446.536 1875.08 422.148 1836.14 382.861C1797.16 343.575 1773 289.357 1773 229.662L1773 230.01C1773 170.316 1797.2 116.063 1836.14 76.8111C1875.11 37.5249 1928.9 13.1368 1988.12 13.1368L2764.57 13.1368L2764.57 126.71L2559.73 126.71L2559.73 126.778Z" fill="currentColor"/>
+<path d="M5950.76 126.778L5766.15 126.778L5379.15 126.778C5351.04 126.778 5302.89 138.41 5284.29 157.152C5265.7 175.894 5254.16 201.71 5254.16 230.044L5254.16 229.696C5254.16 258.03 5265.7 283.847 5284.29 302.588C5302.89 321.33 5351.04 332.963 5379.15 332.963L5766.15 332.963L5950.76 332.963L6155.59 332.963L6155.59 446.536L5379.15 446.536C5319.93 446.536 5266.11 422.148 5227.16 382.861C5188.19 343.575 5164.03 289.357 5164.03 229.662L5164.03 230.01C5164.03 170.316 5188.22 116.063 5227.16 76.8111C5266.14 37.5249 5319.93 13.1368 5379.15 13.1368L6155.59 13.1368L6155.59 126.71L5950.76 126.71L5950.76 126.778Z" fill="currentColor"/>
+<path d="M2018.59 652.105L2204.43 652.105L2593.99 652.105C2622.29 652.105 2670.76 663.738 2689.47 682.48C2708.19 701.221 2719.81 727.038 2719.81 755.372L2719.81 755.024C2719.81 783.357 2708.19 809.174 2689.47 827.916C2670.76 846.658 2622.29 858.29 2593.99 858.29L2204.43 858.29L2018.59 858.29L1812.4 858.29L1812.4 971.863L2593.99 971.863C2653.6 971.863 2707.78 947.475 2746.98 908.189C2786.21 868.903 2810.53 814.684 2810.53 754.99L2810.53 755.338C2810.53 695.643 2786.18 641.391 2746.98 602.138C2707.75 562.852 2653.6 538.464 2593.99 538.464L1812.4 538.464L1812.4 652.037L2018.59 652.037L2018.59 652.105Z" fill="currentColor"/>
+<path d="M5409.62 652.105L5595.46 652.105L5985.02 652.105C6013.31 652.105 6061.79 663.738 6080.5 682.48C6099.22 701.221 6110.83 727.038 6110.83 755.372L6110.83 755.024C6110.83 783.357 6099.22 809.174 6080.5 827.916C6061.79 846.658 6013.31 858.29 5985.02 858.29L5595.46 858.29L5409.62 858.29L5203.43 858.29L5203.43 971.863L5985.02 971.863C6044.63 971.863 6098.81 947.475 6138.01 908.189C6177.24 868.903 6201.56 814.684 6201.56 754.99L6201.56 755.338C6201.56 695.643 6177.21 641.391 6138.01 602.138C6098.78 562.852 6044.63 538.464 5985.02 538.464L5203.43 538.464L5203.43 652.037L5409.62 652.037L5409.62 652.105Z" fill="currentColor"/>
+</svg></a>
+  <div class="f-row t-small">
+    <span class="f-l">The&nbsp;world’s first titanium tongue drum</span>
+    <nav aria-label="Footer"><a href="https://kosmosky.example/instagram" target="_blank" rel="noopener">Instagram&nbsp;↗</a><a href="https://youtu.be/8kx-ayJBvc8" target="_blank" rel="noopener">YouTube&nbsp;↗</a><a href="https://kosmosky.example/titan" target="_blank" rel="noopener">Order&nbsp;↗</a></nav>
+    <span class="f-r">©&nbsp;2026&nbsp;KOSMOSKY</span>
+  </div>
+  </div>
+</footer>
+
+<audio class="track" src="assets/audio/titan-sound-2.m4a" preload="auto" loop></audio>
+
+<script src="js/site.js?v=6"></script>
+<script src="js/review.js?v=1"></script>
+</body>
+</html>

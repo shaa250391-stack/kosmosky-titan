@@ -1,0 +1,9 @@
+/* Токены сайта «Титановый глюкофон» (из концепта D, фиксация 5 ноября 2026). Описание – docs/design-system.md → Токены. */
+:root{
+  --void:#07080B; --cell:#0A0B10; --fg:#ECEAE5; --mute:#8B8D96; --dim:#4A4C56;
+  --line:rgba(236,234,229,.16); --frame:#D8D6D0; --fw:2px; --tb:61px; --line-2:rgba(236,234,229,.3);
+  --accent:#3A5BD9; --accent-hi:#6F8BFF;
+  --g:10px; --pad:20px;
+  --display:'Apfel Grotezk',system-ui,sans-serif; --sans:'Geist',system-ui,sans-serif;
+}
+@media (max-width:768px){ :root{ --g:8px; --pad:16px; --fw:1px; --tb:55px; } }
