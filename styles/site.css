@@ -322,7 +322,6 @@ html:not(.has-motion) .call,html:not(.has-motion) .rare-photo{opacity:1}
 .cu-stage{position:sticky;top:calc(var(--g) + var(--tb));height:calc(100svh - 2 * var(--g) - var(--tb));overflow:hidden;background:#000;border:var(--fw) solid var(--frame);color:#ECEAE5;--fg:#ECEAE5;--mute:rgba(236,234,229,.72)}
 .cu-frame{position:absolute;inset:0;overflow:hidden}
 .cu-frame img,.cu-frame video{position:absolute;inset:0;width:100%;max-width:none;height:100%;object-fit:cover}
-.has-motion .cu-frame img{visibility:hidden}
 .cu-stage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,8,11,.5),transparent 28%,transparent 60%,rgba(7,8,11,.8));pointer-events:none}
 .cu-cap{position:absolute;inset:var(--pad);z-index:1;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none}
 .cu-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
