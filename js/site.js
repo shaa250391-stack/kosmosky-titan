@@ -11,6 +11,14 @@
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
   if (hasGsap) gsap.registerPlugin(ScrollTrigger, SplitText);
   const mob = () => innerWidth <= 768;
+  /* Язык страницы: index.html – английский, ru.html (собирается scripts/build_ru.py) – русский. Строки, которые пишет скрипт */
+  const RU = document.documentElement.lang === 'ru';
+  const T = RU ? { soundOn: 'Включить звук', soundOff: 'Выключить звук', play: 'Включить звук титанового глюкофона', pause: 'Поставить звук на паузу',
+      playing: 'Играет', muted: 'Выключен', swipe: 'Листайте', ytTitle: 'Титановый глюкофон: полный видеообзор', alt: 'титановый глюкофон',
+      diam: 'Диаметр', tongues: 'Язычки', price: 'Цена', cm: 'см' }
+    : { soundOn: 'Sound on', soundOff: 'Sound off', play: 'Play the sound of the titanium tongue drum', pause: 'Pause the sound',
+      playing: 'Playing', muted: 'Muted', swipe: 'Swipe', ytTitle: 'Titanium tongue drum: full video review', alt: 'the titanium tongue drum',
+      diam: 'Diameter', tongues: 'Tongues', price: 'Price', cm: 'cm' };
 
   /* Звук: дорожка того же ролика */
   const video = $('.c-video video'), track = $('.track'), btn = $('.c-sound'), label = $('.cursor-label');
@@ -21,10 +29,10 @@
       fdata = new Uint8Array(analyser.frequencyBinCount); } catch (e) { actx = null; } };
   const setSound = on => {
     if (on) ensureAudio();
-    const lb = document.querySelector('.listen'); if (lb) { lb.setAttribute('aria-pressed', on); lb.setAttribute('aria-label', on ? 'Pause the sound' : 'Play the sound of the titanium tongue drum'); }
-    const ws = document.querySelector('.wave-state'); if (ws) ws.textContent = on ? 'Playing' : 'Muted';
-    btn.setAttribute('aria-pressed', on); btn.setAttribute('aria-label', on ? 'Turn sound off' : 'Turn sound on');
-    label.textContent = on ? 'Sound off' : 'Sound on';
+    const lb = document.querySelector('.listen'); if (lb) { lb.setAttribute('aria-pressed', on); lb.setAttribute('aria-label', on ? T.pause : T.play); }
+    const ws = document.querySelector('.wave-state'); if (ws) ws.textContent = on ? T.playing : T.muted;
+    btn.setAttribute('aria-pressed', on); btn.setAttribute('aria-label', on ? T.soundOff : T.soundOn);
+    label.textContent = on ? T.soundOff : T.soundOn;
     if (on) { track.currentTime = (video.currentTime || 0) % (track.duration || 20); track.volume = 0; track.play().catch(() => {});
       hasGsap ? gsap.to(track, { volume: .85, duration: 1.4 }) : (track.volume = .85); }
     else if (hasGsap) gsap.to(track, { volume: 0, duration: .6, onComplete: () => track.pause() }); else track.pause();
@@ -98,7 +106,10 @@
   if ('IntersectionObserver' in window && !isStatic) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } }), { rootMargin: '600px 0px' }); lazy.forEach(v => io.observe(v)); }
   else lazy.forEach(load);
 
-  if (mob()) { const h = $('.p-hint'); if (h) h.lastChild.textContent = 'Swipe';
+  if (mob()) { const h = $('.p-hint'); if (h) h.lastChild.textContent = T.swipe;
+    /* как в портфолио: при листании ленты вбок колесом или трекпадом жест имеет и вертикальную часть, её подхватывал Lenis и сдвигал
+       страницу. Горизонтальный жест останавливаем на ленте – листает сама лента, вертикальный проходит дальше как обычно */
+    $('.path-pin').addEventListener('wheel', e => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) e.stopPropagation(); }, { passive: true });
     if ('IntersectionObserver' in window) { const io3 = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('is-on', e.intersectionRatio > .6)), { threshold: [0, .6, 1] }); $$('.p-stage').forEach(c => io3.observe(c)); } }
   /* Живая звуковая волна: реагирует на звук, без звука тихо дышит */
   const wv = $('.c-wave canvas'), wctx = wv.getContext('2d'); let wW = 0, wH = 0, wOn = false;
@@ -120,12 +131,12 @@
       const y = base - 28 * env * (Math.sin(t * 42) + harm * .5 * Math.sin(t * 84 + .6) + harm * .3 * Math.sin(t * 126 + 1.3)) / (1 + harm * .8);
       d += (x > 52 ? 'L' : 'M') + x + ' ' + y.toFixed(1); } return d; };
   $('.w-steel').setAttribute('d', wave(6.5, 0, 32)); $('.w-ti').setAttribute('d', wave(1.6, 1, 98));
-  /* 08: обзор YouTube – плеер грузится только по клику, поверх крупного плана */
+  /* 02: обзор YouTube – плеер грузится только по клику, поверх пролёта */
   const yt = $('.cu-stage'), ytBtn = $('.cu-yt');
   const playYt = () => { if (yt.classList.contains('is-playing')) return; yt.classList.add('is-playing');
     if (btn.getAttribute('aria-pressed') === 'true') setSound(false);
     const f = document.createElement('iframe'); f.src = 'https://www.youtube-nocookie.com/embed/8kx-ayJBvc8?autoplay=1&rel=0';
-    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true; f.title = 'Titanium tongue drum: full video review'; yt.append(f); };
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true; f.title = T.ytTitle; yt.append(f); if (window.lenis) lenis.scrollTo(yt.closest('.closeup'), { offset: -$('.topbar').offsetHeight, duration: .8 }); };
   ytBtn.addEventListener('click', playYt);
 
   /* 08: пролёт – видео, где каждый кадр ключевой (163 кадра, 25 к/с), скролл перематывает его. Перемотка такого видео занимает
@@ -139,7 +150,9 @@
     const setSrc = s => { cuV.src = s; cuV.preload = 'auto'; cuV.load(); };
     fetch(url).then(r => { if (!r.ok) throw 0; return r.blob(); }).then(b => setSrc(URL.createObjectURL(b))).catch(() => setSrc(url)); };
   const cuSeek = p => { cuT = Math.max(0, Math.min(1, p)); };
-  if (motionOn) { new IntersectionObserver((es, ob) => { if (es[0].isIntersecting) { cuLoad(); ob.disconnect(); } }, { rootMargin: '400% 0px' }).observe(yt);
+  /* блок стоит сразу под первым экраном: ролик (13 МБ) начинает качаться после входа, чтобы не мешать видео первого экрана */
+  const cuArm = () => new IntersectionObserver((es, ob) => { if (es[0].isIntersecting) { cuLoad(); ob.disconnect(); } }, { rootMargin: '400% 0px' }).observe(yt);
+  if (motionOn) {
     let shown = -1;
     gsap.ticker.add(() => { if (!cuDur) return; const d = cuT - cuF; cuF = Math.abs(d) < .0005 ? cuT : cuF + d * .16;
       const n = Math.round(cuDur * CU_FPS) - 1, fr = Math.round(cuF * n); if (fr === shown || cuV.seeking) return; shown = fr; cuV.currentTime = (fr + .5) / CU_FPS; }); }
@@ -170,7 +183,9 @@
     for (let t = 0; t <= 18; t++) { const a = -Math.PI / 2 + t / 18 * Math.PI; out.push(P(L - h + Math.cos(a) * h, Math.sin(a) * h)); }
     for (let t = 0; t <= 14; t++) out.push(P((1 - t / 14) * (L - h), h));
     tongues.push({ pts: out, o, w: .95 });
-    [-1, 1].forEach(sg => { const sl = []; for (let t = 0; t <= 10; t++) sl.push(P(L - h * .55 - t / 10 * L * .5, sg * W / 6)); tongues.push({ pts: sl, o: o + .04, w: .7 }); });
+    /* прорезь начинается на самом закруглении кончика (u0 – точка дуги на линии прорези) и идёт к основанию */
+    [-1, 1].forEach(sg => { const v = sg * W / 6, u0 = L - h + Math.sqrt(h * h - v * v), u1 = L - h * .55 - L * .5, sl = [];
+      for (let t = 0; t <= 12; t++) sl.push(P(u0 - t / 12 * (u0 - u1), v)); tongues.push({ pts: sl, o: o + .04, w: .7 }); });
     [-1, 0, 1].forEach(f => tips.push({ p: P(L - h * .75, f * W / 3), ph: Math.random() * 6.28 }));
   };
   addTongue(.17, 0, 0, .34, .22, .55);
@@ -179,14 +194,19 @@
   const calls = $$('.call');
   let rp = isStatic || !motionOn ? .82 : 0, rW = 0, rH = 0, rOn = false, rYaw = .3, rPitch = .12, rMx = 0, rMy = 0, rDraw = rp > .5 ? 1 : 0, rTime = 0;
   const ripples = [];
-  const sizeR = () => { const b = rcv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); rW = b.width; rH = b.height; rcv.width = rW * d; rcv.height = rH * d; rc.setTransform(d, 0, 0, d, 0, 0); };
+  /* rCy, rFit – центр и высота свободного места между заголовком и нижним текстом: модель стоит посередине и не заходит на буквы */
+  /* rDy, rK – сдвиг и масштаб, которые вписывают реальные границы каркаса (верх и обод) в это место; считаются каждый кадр в fitR */
+  let rCy = 0, rFit = 1e9, rDy = 0, rK = 1;
+  const sizeR = () => { const b = rcv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); rW = b.width; rH = b.height; rcv.width = rW * d; rcv.height = rH * d; rc.setTransform(d, 0, 0, d, 0, 0);
+    const tB = $('.rare-title').getBoundingClientRect().bottom - b.top, xT = $('.rare-text').getBoundingClientRect().top - b.top;
+    rCy = (tB + xT) / 2; rFit = Math.max(60, xT - tB - 48); };
   const ez3 = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
   const projR = ([x, y, z]) => {
     const cy = Math.cos(rYaw), sy = Math.sin(rYaw), cp = Math.cos(rPitch), sp = Math.sin(rPitch);
     const X = x * cy - z * sy, Z1 = x * sy + z * cy, Y = y * cp - Z1 * sp, Z = y * sp + Z1 * cp;
-    const sc = Math.min(rW * (mob() ? .42 : .32), rH * .4), f = 4.2, k = sc * f / (f + Z);
-    return [rW / 2 + X * k, rH * (mob() ? .4 : .41) - Y * k, Z];
+    const sc = Math.min(rW * (mob() ? .42 : .3), rH * .34) * rK, f = 4.2, k = sc * f / (f + Z);
+    return [rW / 2 + X * k, rCy + rDy - Y * k, Z];
   };
   let botA = 1;
   const strokeSet = (set, rgb, baseA, prog, lw = 1) => {
@@ -222,43 +242,61 @@
   const stepR = dt => {
     rTime += dt;
     const e = ez3(cl((rp - .12) / .6));
-    const tPitch = .06 + e * .7 + rMy * .16, tYaw = .3 + rTime * .1 + rp * 1.6 + rMx * .35;
-    rPitch += (tPitch - rPitch) * .06; rYaw += (tYaw - rYaw) * .06; botA = 1 - .85 * cl((rPitch - .15) / .5);
+    /* наклон отрицательный: при прокрутке инструмент поворачивается к зрителю верхом с язычками, дно уходит назад и гаснет */
+    const tPitch = -(.06 + e * .7) + rMy * .16, tYaw = .3 + rTime * .1 + rp * 1.6 + rMx * .35;
+    rPitch += (tPitch - rPitch) * .06; rYaw += (tYaw - rYaw) * .06; botA = 1 - .85 * cl((Math.abs(rPitch) - .15) / .5);
     rDraw += (cl(rp / .32) - rDraw) * .07;
     if (rDraw > .9 && Math.random() < dt * (track && !track.paused ? 2.2 : .8)) ripples.push({ p: tips[Math.floor(Math.random() * tips.length)].p, t: rTime });
     while (ripples.length && rTime - ripples[0].t > 1.7) ripples.shift();
-    drawR();
+    fitR(false); drawR();
   };
-  sizeR(); rYaw = .3 + rp * 1.6; rPitch = .06 + ez3(cl((rp - .12) / .6)) * .7; botA = 1 - .85 * cl((rPitch - .15) / .5); drawR();
-  addEventListener('resize', () => { sizeR(); drawR(); });
+  /* вписать каркас: проекция верхней поверхности и обода без поправок, их высота и центр -> масштаб (не больше 1) и сдвиг к центру свободного места.
+     В движении поправка догоняет цель плавно (lerp), чтобы не дёргалась при повороте */
+  const fitPts = grid.filter(l => !l.bot).flatMap(l => l.pts.filter((_, i) => i % 3 === 0));
+  const fitR = snap => { const d0 = rDy, k0 = rK; rDy = 0; rK = 1; let lo = 1e9, hi = -1e9;
+    fitPts.forEach(pt => { const y = projR(pt)[1]; if (y < lo) lo = y; if (y > hi) hi = y; });
+    const tk = Math.min(1, rFit / Math.max(1, hi - lo)), td = (rCy - (lo + hi) / 2) * tk;
+    rK = snap ? tk : k0 + (tk - k0) * .15; rDy = snap ? td : d0 + (td - d0) * .15; };
+  sizeR(); rYaw = .3 + rp * 1.6; rPitch = -(.06 + ez3(cl((rp - .12) / .6)) * .7); botA = 1 - .85 * cl((Math.abs(rPitch) - .15) / .5); fitR(true); drawR();
+  addEventListener('resize', () => { sizeR(); fitR(true); drawR(); });
+  document.fonts.ready.then(() => { sizeR(); fitR(true); drawR(); });
   $('.rare').addEventListener('pointermove', e => { rMx = e.clientX / innerWidth - .5; rMy = e.clientY / innerHeight - .5; });
   if ('IntersectionObserver' in window && motionOn) new IntersectionObserver(es => { rOn = es[0].isIntersecting; }).observe($('.rare-stage'));
   if (motionOn) { let last = performance.now(); (function loopR(now) { const dt = Math.min(.05, (now - last) / 1000); last = now; if (rOn) stepR(dt); requestAnimationFrame(loopR); })(last); }
   else document.fonts.ready.then(() => { sizeR(); drawR(); });
 
-  /* 08: модели. Инструмент у всех один – титановый прототип (по решению владельца), у Mini чуть меньше */
+  /* 11: модели. Размер на экране пропорционален диаметру: 38 см (New Wave 15, Mini Shelton 10) и 47 см (Shelton 10 и 15), sc = диаметр / 47 */
   const MODELS = [
-    { name: 'New Wave 15', img: 'assets/img/d-model-nw15.webp', price: '$1,090', tg: '15 tongues', bg: '#1A1B21', sc: 1, line: 'Fifteen tongues, each tuned to&nbsp;a&nbsp;note with overtones.' },
-    { name: 'Mini Shelton 10', img: 'assets/img/d-model-mini.webp', price: '$1,190', tg: '10 tongues', bg: '#3A5BD9', sc: .8, line: 'The&nbsp;compact one: ten tongues in&nbsp;a&nbsp;smaller body.' },
-    { name: 'Shelton 10', img: 'assets/img/d-model-sh10.webp', price: '$1,330', tg: '10 tongues', bg: '#1A1B21', sc: 1, line: 'Ten tongues on&nbsp;the&nbsp;full-size Shelton body.' },
-    { name: 'Shelton 15', img: 'assets/img/d-model-sh15.webp', price: '$1,480', tg: '15 tongues', bg: '#3A5BD9', sc: 1, line: 'Fifteen tongues on&nbsp;the&nbsp;full-size Shelton body.' }];
-  const SHOP = 'https://kosmosky.example/titan';
-  const textHTML = m => `<div class="mtext"><h3 class="mname"><span>${m.name}</span></h3><p class="mline t-body">${m.line}</p>
-    <div class="mchips"><span class="mchip">${m.price}</span><span class="mchip">${m.tg}</span><a class="mchip" href="${SHOP}" target="_blank" rel="noopener">Order <span aria-hidden="true">↗</span></a></div></div>`;
-  const marqHTML = k => { const one = MODELS.map((m, i) => `<span data-i="${i}" class="${i === k ? 'on' : ''}">${m.name}</span>`).join(''); return `<div class="mmarq t-ui" aria-hidden="true"><div class="mmarq-row">${one}${one}${one}${one}</div></div>`; };
-  const cardHTML = (k, all) => `<article class="mcard" style="background:${MODELS[k].bg}">
-      <div><div class="mprog" aria-hidden="true">${MODELS.map((m, i) => `<i><b style="${!all && i <= k ? 'transform:scaleX(1)' : ''}"></b></i>`).join('')}</div>
-        <div class="mcount t-small"><span class="mnum">0${k + 1} / 04</span><span class="mnote">Titanium</span></div></div>
-      ${marqHTML(k)}
-      <div class="mtexts">${(all ? MODELS : [MODELS[k]]).map(textHTML).join('')}</div></article>`;
+    { name: 'New Wave 15', n: 15, d: 38, img: 'assets/img/d-model-nw15.webp', price: '$1,090', tg: '15 tongues', bg: '#1A1B21', sc: .821, line: 'Fifteen tongues, each tuned to&nbsp;a&nbsp;note with overtones.' },
+    { name: 'Mini Shelton 10', n: 10, d: 38, img: 'assets/img/d-model-mini.webp', price: '$1,190', tg: '10 tongues', bg: '#3A5BD9', sc: .808, line: 'The&nbsp;compact one: ten tongues in&nbsp;a&nbsp;smaller body.' },
+    { name: 'Shelton 10', n: 10, d: 47, img: 'assets/img/d-model-sh10.webp', price: '$1,330', tg: '10 tongues', bg: '#1A1B21', sc: 1, line: 'Ten tongues on&nbsp;the&nbsp;full-size Shelton body.' },
+    { name: 'Shelton 15', n: 15, d: 47, img: 'assets/img/d-model-sh15.webp', price: '$1,480', tg: '15 tongues', bg: '#3A5BD9', sc: 1, line: 'Fifteen tongues on&nbsp;the&nbsp;full-size Shelton body.' }];
+  if (RU) [['New Wave 15', 'Пятнадцать язычков, каждый настроен на&nbsp;ноту с&nbsp;обертонами.', '88&nbsp;000&nbsp;₽'],
+    ['Мини Шелтон 10', 'Компактная: десять язычков в&nbsp;корпусе поменьше.', '96&nbsp;000&nbsp;₽'],
+    ['Шелтон 10', 'Десять язычков на&nbsp;полноразмерном корпусе Шелтон.', '108&nbsp;000&nbsp;₽'],
+    ['Шелтон 15', 'Пятнадцать язычков на&nbsp;полноразмерном корпусе Шелтон.', '120&nbsp;000&nbsp;₽']].forEach(([name, line, price], i) => Object.assign(MODELS[i], { name, line, price }));
+  /* B2 «Зеркало»: справа вверху имя и описание модели, справа внизу паспорт; слева внизу список моделей с ценами */
+  const textHTML = m => `<div class="mtext"><h3 class="mname t-big"><span>${m.name}</span></h3><p class="mline t-body">${m.line}</p></div>`;
+  const specHTML = m => `<li><span class="k">${T.diam}</span><span class="v" data-s="d">${m.d}&nbsp;${T.cm}</span></li><li><span class="k">${T.tongues}</span><span class="v" data-s="n">${m.n}</span></li><li><span class="k">${T.price}</span><span class="v" data-s="price">${m.price}</span></li>`;
   const mSec = $('.models'), mStage = $('.mstage');
+  /* выбор модели кнопками (правка команды: скролл не всем очевиден) */
+  const HOLD = .7, MOVE = 1, STEP = MOVE + HOLD, total = HOLD + 3 * STEP;
+  let mST = null, goY = y => scrollTo(0, y);
+  const pick = $('.mpick');
+  pick.innerHTML = MODELS.map((m, i) => `<li><button type="button" data-k="${i}"${i ? '' : ' aria-current="true"'}><span class="t-small">0${i + 1}</span><span class="n">${m.name}</span><span class="p">${m.price}</span></button></li>`).join('');
+  const pickBtns = $$('.mpick button');
+  const markPick = k => pickBtns.forEach((b, i) => b.setAttribute('aria-current', i === k));
+  pickBtns.forEach((b, k) => b.addEventListener('click', () => { markPick(k);
+    if (mST) { const p = (k ? HOLD + (k - 1) * STEP + MOVE + HOLD * .5 : HOLD * .5) / total; goY(mST.start + p * (mST.end - mST.start)); }
+    else { const it = $$('.mlist .mitem')[k]; if (it) goY(it.getBoundingClientRect().top + scrollY - $('.topbar').offsetHeight - 12); } }));
   const useMorph = motionOn && !mob();
   if (useMorph) {
     mSec.classList.add('is-pin');
-    mStage.insertAdjacentHTML('beforeend', `<div class="mfloat" aria-hidden="true"><div class="mfloat-in"><span class="mshadow"></span>${MODELS.map(m => `<img src="${m.img}" alt="" loading="lazy">`).join('')}</div></div>` + cardHTML(0, true));
+    mStage.insertAdjacentHTML('beforeend', `<div class="mfloat" aria-hidden="true"><div class="mfloat-in"><span class="mshadow"></span>${MODELS.map(m => `<img src="${m.img}" alt="" loading="lazy">`).join('')}</div></div>`);
+    $('.mtexts').innerHTML = MODELS.map(textHTML).join(''); $('.mspec').innerHTML = specHTML(MODELS[0]);
   } else {
     mSec.classList.add('is-list');
-    mStage.insertAdjacentHTML('beforeend', `<div class="mlist">${MODELS.map((m, k) => `<div class="mitem"><img class="mfig" src="${m.img}" alt="${m.name}: the titanium tongue drum" loading="lazy" style="scale:${m.sc}">${cardHTML(k, false)}</div>`).join('')}</div>`);
+    $('.mbuy-l').insertAdjacentHTML('afterend', `<div class="mlist">${MODELS.map(m => `<div class="mitem"><img class="mfig" src="${m.img}" alt="${m.name}: ${T.alt}" loading="lazy" style="scale:${m.sc}">${textHTML(m)}<ul class="mspec t-ui">${specHTML(m)}</ul></div>`).join('')}</div>`);
   }
 
   /* 08: решётка титана на фоне – гексагональная плотноупакованная (c/a ≈ 1.587), тонко и полупрозрачно */
@@ -297,11 +335,13 @@
   /* Сумма: окошки-барабаны */
   const sumEl = $('.sum'), rolls = [];
   const addTxt = (t, c) => { const e = document.createElement('span'); e.className = c; e.textContent = t; e.setAttribute('aria-hidden', 'true'); sumEl.append(e); };
-  addTxt('$', 'sym');
-  [...'1,900'].forEach((ch, i) => { if (ch === ',') return addTxt(',', 'comma');
+  /* EN: $1,900; RU: 154 000 ₽ (знак рубля после числа, тонкий пробел между разрядами) */
+  if (!RU) addTxt('$', 'sym');
+  [...(RU ? '154 000' : '1,900')].forEach((ch, i) => { if (ch === ',' || ch === ' ') return addTxt(ch === ',' ? ',' : '\u2009', 'comma');
     const d = +ch, slot = document.createElement('span'); slot.className = 'slot'; slot.setAttribute('aria-hidden', 'true');
     const col = document.createElement('span'); for (let k = 0; k < 30; k++) { const c = document.createElement('span'); c.textContent = k % 10; col.append(c); }
     slot.append(col); sumEl.append(slot); rolls.push({ col, end: 20 + d, start: (d + 3 + i * 3) % 10 }); });
+  if (RU) { addTxt('\u2009', 'comma'); addTxt('₽', 'sym'); } /* тонкий пробел перед знаком рубля, как между разрядами */
   const setRoll = (r, k) => r.col.style.transform = `translateY(${-k * 1.18}em)`;
   rolls.forEach(r => setRoll(r, r.end));
 
@@ -309,7 +349,8 @@
   if (!motionOn) { stepMarquee(0); const to = params.get('to'); if (to) document.fonts.ready.then(() => { const el = document.getElementById(to); if (el) document.body.style.marginTop = -(el.getBoundingClientRect().top + scrollY) + 'px'; }); return; }
 
   /* ---------- Движение ---------- */
-  const lenis = new Lenis({ duration: 1.3, smoothWheel: true });
+  const lenis = window.lenis = new Lenis({ duration: 1.3, smoothWheel: true });
+  goY = y => lenis.scrollTo(y, { duration: 1.2 });
   lenis.on('scroll', e => { ScrollTrigger.update(); boost = Math.min(600, boost + Math.abs(e.velocity) * 4); });
   let autoYaw = .6;
   gsap.ticker.add((t, dt) => {
@@ -346,6 +387,25 @@
     .to('.c-specs .in', { opacity: 1, duration: .6, stagger: .04 }, '<.15')
     .add(() => { lenis.start(); }, '<');
   var drawState;
+
+  /* ---------- 03. Почему первый ---------- */
+  const fLead = new SplitText('.first-lead', { type: 'lines', mask: 'lines' });
+  gsap.from(fLead.lines, { yPercent: 105, duration: 1.3, stagger: .1, ease: 'expo.out', onComplete: () => fLead.revert(), scrollTrigger: { trigger: '.c-first', start: 'top 70%' } });
+  gsap.from(['.c-first .cell-top', '.first-note'], { opacity: 0, y: 20, duration: 1.1, stagger: .15, ease: 'expo.out', scrollTrigger: { trigger: '.c-first', start: 'top 70%' } });
+  /* ---------- 04. Почему титан: плашка на заголовке, шкала цветов побежалости раскрывается сверху вниз ---------- */
+  const wSplit = new SplitText('.c-why .t-done', { type: 'lines', linesClass: 'ln' });
+  const wPlates = wSplit.lines.map(l => { const pl = document.createElement('span'); pl.className = 'plate'; l.append(pl); return pl; });
+  gsap.set(wSplit.lines, { color: 'transparent' });
+  gsap.timeline({ scrollTrigger: { trigger: '.c-why', start: 'top 70%' } })
+    .to(wPlates, { scaleX: 1, duration: .55, stagger: .12, ease: 'power3.inOut' })
+    .set(wSplit.lines, { color: '' })
+    .to(wPlates, { scaleX: 0, transformOrigin: '100% 50%', duration: .6, stagger: .12, ease: 'power3.inOut' })
+    .from('.c-why .t-mid', { opacity: 0, y: 24, duration: 1.1, ease: 'expo.out' }, '<.2');
+  gsap.timeline({ scrollTrigger: { trigger: '.tints', start: 'top 80%' } })
+    .from('.tints', { clipPath: 'inset(0 0 100% 0)', duration: 1.6, ease: 'expo.inOut' })
+    .from('.tint span', { opacity: 0, y: 8, duration: .6, stagger: .12 }, '-=.8');
+  gsap.from('.c-mat .t-body', { opacity: 0, y: 20, duration: 1.1, stagger: .12, ease: 'expo.out', scrollTrigger: { trigger: '.c-mat', start: 'top 88%' } });
+  gsap.from('.sum-note', { opacity: 0, y: 20, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: '.c-sum', start: 'top 60%' } });
 
   /* ---------- 2. Сообщество ---------- */
   gsap.timeline({ scrollTrigger: { trigger: '.c-band', start: 'top bottom', end: 'bottom top', scrub: .8 } })
@@ -392,7 +452,7 @@
   }
 
   /* ---------- 5. У нас получилось ---------- */
-  const doneSplit = new SplitText('.t-done', { type: 'lines', linesClass: 'ln' });
+  const doneSplit = new SplitText('#done .t-done', { type: 'lines', linesClass: 'ln' });
   const dPlates = doneSplit.lines.map(l => { const pl = document.createElement('span'); pl.className = 'plate'; l.append(pl); return pl; });
   gsap.set(doneSplit.lines, { color: 'transparent' });
   gsap.timeline({ scrollTrigger: { trigger: '.c-done', start: 'top 70%' } })
@@ -423,11 +483,13 @@
 
   /* ---------- 06. Пауза: прогресс секции крутит каркас; текст появляется во второй половине ---------- */
   ScrollTrigger.create({ trigger: '.rare', start: 'top bottom', end: 'bottom bottom', onUpdate: st => { rp = st.progress; $('.rare').classList.toggle('is-on', rp > .6); } });
-  const rSplit = new SplitText('.rare-text .t-big', { type: 'lines', mask: 'lines' });
-  gsap.set(rSplit.lines, { yPercent: 105 }); gsap.set('.rare-text .t-body', { opacity: 0, y: 16 });
-  const rTl = gsap.timeline({ paused: true }).to(rSplit.lines, { yPercent: 0, duration: 1.4, stagger: .12, ease: 'expo.out' })
-    .to('.rare-text .t-body', { opacity: 1, y: 0, duration: 1.2, ease: 'expo.out' }, '<.4');
-  ScrollTrigger.create({ trigger: '.rare', start: '58% bottom', onEnter: () => rTl.play(), onLeaveBack: () => rTl.reverse() });
+  /* заголовок над каркасом появляется, когда сцена встала; абзац и три причины – во второй половине */
+  const rSplit = new SplitText('.rare-title', { type: 'lines', mask: 'lines' });
+  gsap.set(rSplit.lines, { yPercent: 105 }); gsap.set(['.rare-p', '.rare-list li'], { opacity: 0, y: 16 });
+  const rTl = gsap.timeline({ paused: true }).to(rSplit.lines, { yPercent: 0, duration: 1.4, stagger: .12, ease: 'expo.out' });
+  const rTl2 = gsap.timeline({ paused: true }).to(['.rare-p', '.rare-list li'], { opacity: 1, y: 0, duration: 1.2, stagger: .1, ease: 'expo.out' });
+  ScrollTrigger.create({ trigger: '.rare', start: '36% bottom', onEnter: () => rTl.play(), onLeaveBack: () => rTl.reverse() });
+  ScrollTrigger.create({ trigger: '.rare', start: '58% bottom', onEnter: () => rTl2.play(), onLeaveBack: () => rTl2.reverse() });
   ScrollTrigger.create({ trigger: '#price', start: () => 'top top+=' + ($('.topbar').offsetHeight + 4),
     onEnter: () => document.body.classList.add('is-light'), onLeaveBack: () => document.body.classList.remove('is-light') });
 
@@ -447,13 +509,13 @@
   gsap.from(cuSplit.lines, { yPercent: 105, duration: 1.3, stagger: .1, ease: 'expo.out', onComplete: () => cuSplit.revert(), scrollTrigger: { trigger: yt, start: 'top 45%' } });
   gsap.from(['.cu-cap .cell-top', '.cu-yt'], { opacity: 0, y: 12, duration: 1, stagger: .08, ease: 'expo.out', scrollTrigger: { trigger: yt, start: 'top 45%' } });
 
-  /* ---------- 8. Модели: инструменты выплывают снизу и уплывают вверх синхронно со сменой текста в карточке ---------- */
+  /* ---------- 11. Модели: инструменты выплывают снизу и уплывают вверх синхронно со сменой имени справа и паспорта ---------- */
   if (useMorph) {
-    const card = $('.mcard'), drums = $$('.mfloat img'), shadow = $('.mshadow'), texts = $$('.mtext'), num = $('.mnum'), bars = $$('.mprog b'), mq = $$('.mmarq-row span');
-    const HOLD = .7, MOVE = 1, STEP = MOVE + HOLD, total = HOLD + 3 * STEP;
+    const drums = $$('.mfloat img'), shadow = $('.mshadow'), texts = $$('.mtexts .mtext'), num = $('.mnum'), specD = $('.mspec [data-s=d]'), specN = $('.mspec [data-s=n]'), specP = $('.mspec [data-s=price]');
     mSec.style.height = `calc(${mStage.getBoundingClientRect().height}px + ${3 * 90}vh)`;
     texts.forEach((t, i) => { if (i) gsap.set(t, { autoAlpha: 0 }); });
     drums.forEach((d, i) => gsap.set(d, i ? { yPercent: 120, rotate: -18, scale: MODELS[i].sc * .9, autoAlpha: 0 } : { yPercent: 0, rotate: 0, scale: MODELS[0].sc, autoAlpha: 1 }));
+    gsap.set(shadow, { scale: MODELS[0].sc });
     const mTl = gsap.timeline({ paused: true, defaults: { ease: 'none' } });
     for (let k = 1; k < 4; k++) {
       const at = HOLD + (k - 1) * STEP, prevT = texts[k - 1], nextT = texts[k];
@@ -462,30 +524,31 @@
          .to(shadow, { scale: .55, autoAlpha: .25, duration: MOVE * .4, ease: 'power2.in' }, at)
          .fromTo(drums[k], { yPercent: 120, rotate: -18, scale: MODELS[k].sc * .9, autoAlpha: 0 }, { yPercent: 0, rotate: 0, scale: MODELS[k].sc, autoAlpha: 1, duration: MOVE * .7, ease: 'power3.out', immediateRender: false }, at + MOVE * .32)
          .to(shadow, { scale: MODELS[k].sc, autoAlpha: 1, duration: MOVE * .45, ease: 'power2.out' }, at + MOVE * .55)
-         .to(card, { backgroundColor: MODELS[k].bg, duration: MOVE * .8, ease: 'power1.inOut' }, at + MOVE * .1)
          .to(prevT.querySelector('.mname span'), { yPercent: -105, duration: MOVE * .4, ease: 'power2.in' }, at)
-         .to(prevT.querySelectorAll('.mline, .mchips'), { autoAlpha: 0, y: -12, duration: MOVE * .3, ease: 'power2.in' }, at)
+         .to(prevT.querySelector('.mline'), { autoAlpha: 0, y: -12, duration: MOVE * .3, ease: 'power2.in' }, at)
          .set(prevT, { autoAlpha: 0 }, at + MOVE * .42)
          .set(nextT, { autoAlpha: 1 }, at + MOVE * .42)
          .fromTo(nextT.querySelector('.mname span'), { yPercent: 105 }, { yPercent: 0, duration: MOVE * .48, ease: 'power3.out', immediateRender: false }, at + MOVE * .42)
-         .fromTo(nextT.querySelectorAll('.mline, .mchips'), { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: MOVE * .4, stagger: .05, ease: 'power2.out', immediateRender: false }, at + MOVE * .55);
+         .fromTo(nextT.querySelector('.mline'), { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: MOVE * .4, ease: 'power2.out', immediateRender: false }, at + MOVE * .55);
     }
     mTl.to({}, { duration: HOLD }, HOLD + 3 * STEP - HOLD);
     let curK = -1;
-    const setK = k => { if (k === curK) return; curK = k; mq.forEach(sp => sp.classList.toggle('on', +sp.dataset.i === k)); num.textContent = `0${k + 1} / 04`; };
+    /* номер, число язычков и цена в паспорте меняются вместе с именем; короткое мигание значений, чтобы смена была заметна */
+    const setK = k => { if (k === curK) return; const first = curK < 0; curK = k; num.textContent = `0${k + 1} / 04`; markPick(k);
+      specD.innerHTML = MODELS[k].d + '&nbsp;' + T.cm; specN.textContent = MODELS[k].n; specP.innerHTML = MODELS[k].price;
+      if (!first) gsap.fromTo([specD, specN, specP], { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, duration: .45, ease: 'power2.out' }); };
     setK(0);
-    ScrollTrigger.create({ trigger: mSec, start: () => 'top top+=' + $('.topbar').offsetHeight, end: 'bottom bottom', scrub: .8, animation: mTl, invalidateOnRefresh: true,
+    mST = ScrollTrigger.create({ trigger: mSec, start: () => 'top top+=' + $('.topbar').offsetHeight, end: 'bottom bottom', scrub: .8, animation: mTl, invalidateOnRefresh: true,
       onUpdate: st => { lp = st.progress; const tt = st.progress * total;
-        setK(Math.max(0, Math.min(3, Math.floor((tt - HOLD - MOVE * .42) / STEP) + 1)));
-        bars.forEach((b, i) => { const a = i === 0 ? 0 : HOLD + (i - 1) * STEP + MOVE * .42, e = i === 3 ? total : HOLD + i * STEP + MOVE * .42;
-          b.style.transform = `scaleX(${Math.max(0, Math.min(1, (tt - a) / (e - a))).toFixed(3)})`; }); } });
+        setK(Math.max(0, Math.min(3, Math.floor((tt - HOLD - MOVE * .42) / STEP) + 1))); } });
     /* въезд в блок */
-    gsap.from(card, { y: 60, autoAlpha: 0, duration: 1.3, ease: 'expo.out', scrollTrigger: { trigger: mSec, start: 'top 72%' } });
+    gsap.from(['.mright', '.mbuy-l', '.mbuy-r'], { y: 40, autoAlpha: 0, duration: 1.3, stagger: .08, ease: 'expo.out', scrollTrigger: { trigger: mSec, start: 'top 72%' } });
     gsap.from('.mfloat-in', { yPercent: 30, autoAlpha: 0, duration: 1.6, ease: 'expo.out', scrollTrigger: { trigger: mSec, start: 'top 70%' } });
     gsap.from('.mhead > *', { y: 24, autoAlpha: 0, duration: 1.1, stagger: .08, ease: 'expo.out', scrollTrigger: { trigger: mSec, start: 'top 78%' } });
     gsap.from('.mlat', { autoAlpha: 0, duration: 2, ease: 'power2.out', scrollTrigger: { trigger: mSec, start: 'top 80%' } });
   } else if (motionOn) {
-    $$('.mlist .mitem').forEach(c => gsap.from(c, { y: 40, autoAlpha: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: c, start: 'top 88%' } }));
+    $$('.mlist .mitem').forEach((c, k) => { gsap.from(c, { y: 40, autoAlpha: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: c, start: 'top 88%' } });
+      ScrollTrigger.create({ trigger: c, start: 'top 50%', end: 'bottom 50%', onToggle: st => { if (st.isActive) markPick(k); } }); });
   }
 
   /* ---------- 9. Финал ---------- */
@@ -529,5 +592,6 @@
       .to('.intro', { opacity: 0, duration: .5 }, '-=.1')
       .set('.intro', { display: 'none' })
       .add(() => intro.play(), '-=.35');
+    setTimeout(cuArm, 1500);
   }));
 })();

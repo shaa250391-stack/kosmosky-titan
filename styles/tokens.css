@@ -7,3 +7,5 @@
   --display:'Apfel Grotezk',system-ui,sans-serif; --sans:'Geist',system-ui,sans-serif;
 }
 @media (max-width:768px){ :root{ --g:8px; --pad:16px; --fw:1px; --tb:55px; } }
+/* Русская версия (ru.html): у Apfel Grotezk нет кириллицы, заголовки – Onest (выбор Антона 14.11.2026, сравнение concepts/fonts-ru.html) */
+html[lang=ru]{--display:'Onest',system-ui,sans-serif}
