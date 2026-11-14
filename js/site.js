@@ -485,7 +485,9 @@
   ScrollTrigger.create({ trigger: '.rare', start: 'top bottom', end: 'bottom bottom', onUpdate: st => { rp = st.progress; $('.rare').classList.toggle('is-on', rp > .6); } });
   /* заголовок над каркасом появляется, когда сцена встала; абзац и три причины – во второй половине */
   const rSplit = new SplitText('.rare-title', { type: 'lines', mask: 'lines' });
-  gsap.set(rSplit.lines, { yPercent: 105 }); gsap.set(['.rare-p', '.rare-list li'], { opacity: 0, y: 16 });
+  /* скрытая строка уходит на 135 % высоты: маска шире строки на .2em снизу (чтобы не резать хвосты букв), при 105 % в эту полосу
+     попадали верхушки ещё скрытых строк – перекладина «Т», кратка «й» */
+  gsap.set(rSplit.lines, { yPercent: 135 }); gsap.set(['.rare-p', '.rare-list li'], { opacity: 0, y: 16 });
   const rTl = gsap.timeline({ paused: true }).to(rSplit.lines, { yPercent: 0, duration: 1.4, stagger: .12, ease: 'expo.out' });
   const rTl2 = gsap.timeline({ paused: true }).to(['.rare-p', '.rare-list li'], { opacity: 1, y: 0, duration: 1.2, stagger: .1, ease: 'expo.out' });
   ScrollTrigger.create({ trigger: '.rare', start: '36% bottom', onEnter: () => rTl.play(), onLeaveBack: () => rTl.reverse() });
