@@ -14,7 +14,7 @@
   /* Язык страницы: index.html – английский, ru.html (собирается scripts/build_ru.py) – русский. Строки, которые пишет скрипт */
   const RU = document.documentElement.lang === 'ru';
   const T = RU ? { soundOn: 'Включить звук', soundOff: 'Выключить звук', play: 'Включить звук титанового глюкофона', pause: 'Поставить звук на паузу',
-      playing: 'Играет', muted: 'Выключен', swipe: 'Листайте', ytTitle: 'Титановый глюкофон: полный видеообзор', yt: '8kx-ayJBvc8', from: '', alt: 'титановый глюкофон',
+      playing: 'Играет', muted: 'Выключен', swipe: 'Листайте', ytTitle: 'Титановый глюкофон: полный видеообзор', yt: '8kx-ayJBvc8', from: 'от&nbsp;', alt: 'титановый глюкофон',
       diam: 'Диаметр', tongues: 'Язычки', price: 'Цена', cm: 'см' }
     : { soundOn: 'Sound on', soundOff: 'Sound off', play: 'Play the sound of the titanium tongue drum', pause: 'Pause the sound',
       playing: 'Playing', muted: 'Muted', swipe: 'Swipe', ytTitle: 'Titanium tongue drum: full video review', yt: 'AJRIKvZw4Fk', from: 'from&nbsp;', alt: 'the titanium tongue drum',
