@@ -14,10 +14,10 @@
   /* Язык страницы: index.html – английский, ru.html (собирается scripts/build_ru.py) – русский. Строки, которые пишет скрипт */
   const RU = document.documentElement.lang === 'ru';
   const T = RU ? { soundOn: 'Включить звук', soundOff: 'Выключить звук', play: 'Включить звук титанового глюкофона', pause: 'Поставить звук на паузу',
-      playing: 'Играет', muted: 'Выключен', swipe: 'Листайте', ytTitle: 'Титановый глюкофон: полный видеообзор', alt: 'титановый глюкофон',
+      playing: 'Играет', muted: 'Выключен', swipe: 'Листайте', ytTitle: 'Титановый глюкофон: полный видеообзор', yt: '8kx-ayJBvc8', from: '', alt: 'титановый глюкофон',
       diam: 'Диаметр', tongues: 'Язычки', price: 'Цена', cm: 'см' }
     : { soundOn: 'Sound on', soundOff: 'Sound off', play: 'Play the sound of the titanium tongue drum', pause: 'Pause the sound',
-      playing: 'Playing', muted: 'Muted', swipe: 'Swipe', ytTitle: 'Titanium tongue drum: full video review', alt: 'the titanium tongue drum',
+      playing: 'Playing', muted: 'Muted', swipe: 'Swipe', ytTitle: 'Titanium tongue drum: full video review', yt: 'AJRIKvZw4Fk', from: 'from&nbsp;', alt: 'the titanium tongue drum',
       diam: 'Diameter', tongues: 'Tongues', price: 'Price', cm: 'cm' };
 
   /* Звук: дорожка того же ролика */
@@ -135,7 +135,7 @@
   const yt = $('.cu-stage'), ytBtn = $('.cu-yt');
   const playYt = () => { if (yt.classList.contains('is-playing')) return; yt.classList.add('is-playing');
     if (btn.getAttribute('aria-pressed') === 'true') setSound(false);
-    const f = document.createElement('iframe'); f.src = 'https://www.youtube-nocookie.com/embed/8kx-ayJBvc8?autoplay=1&rel=0';
+    const f = document.createElement('iframe'); f.src = 'https://www.youtube-nocookie.com/embed/' + T.yt + '?autoplay=1&rel=0'; /* обзор на языке страницы */
     f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true; f.title = T.ytTitle; yt.append(f); if (window.lenis) lenis.scrollTo(yt.closest('.closeup'), { offset: -$('.topbar').offsetHeight, duration: .8 }); };
   ytBtn.addEventListener('click', playYt);
 
@@ -267,23 +267,23 @@
 
   /* 11: модели. Размер на экране пропорционален диаметру: 38 см (New Wave 15, Mini Shelton 10) и 47 см (Shelton 10 и 15), sc = диаметр / 47 */
   const MODELS = [
-    { name: 'New Wave 15', n: 15, d: 38, img: 'assets/img/d-model-nw15.webp', price: '$1,090', tg: '15 tongues', bg: '#1A1B21', sc: .821, line: 'Fifteen tongues, each tuned to&nbsp;a&nbsp;note with overtones.' },
-    { name: 'Mini Shelton 10', n: 10, d: 38, img: 'assets/img/d-model-mini.webp', price: '$1,190', tg: '10 tongues', bg: '#3A5BD9', sc: .808, line: 'The&nbsp;compact one: ten tongues in&nbsp;a&nbsp;smaller body.' },
-    { name: 'Shelton 10', n: 10, d: 47, img: 'assets/img/d-model-sh10.webp', price: '$1,330', tg: '10 tongues', bg: '#1A1B21', sc: 1, line: 'Ten tongues on&nbsp;the&nbsp;full-size Shelton body.' },
-    { name: 'Shelton 15', n: 15, d: 47, img: 'assets/img/d-model-sh15.webp', price: '$1,480', tg: '15 tongues', bg: '#3A5BD9', sc: 1, line: 'Fifteen tongues on&nbsp;the&nbsp;full-size Shelton body.' }];
+    { name: 'New Wave 15', n: 15, d: 38, img: 'assets/img/d-model-nw15.webp', price: '$1,279', tg: '15 tongues', bg: '#1A1B21', sc: .821, line: 'Fifteen tongues, each tuned to&nbsp;a&nbsp;note with overtones.' },
+    { name: 'Mini Shelton 10', n: 10, d: 38, img: 'assets/img/d-model-mini.webp', price: '$1,389', tg: '10 tongues', bg: '#3A5BD9', sc: .808, line: 'The&nbsp;compact one: ten tongues in&nbsp;a&nbsp;smaller body.' },
+    { name: 'Shelton 10', n: 10, d: 47, img: 'assets/img/d-model-sh10.webp', price: '$1,569', tg: '10 tongues', bg: '#1A1B21', sc: 1, line: 'Ten tongues on&nbsp;the&nbsp;full-size Shelton body.' },
+    { name: 'Shelton 15', n: 15, d: 47, img: 'assets/img/d-model-sh15.webp', price: '$1,739', tg: '15 tongues', bg: '#3A5BD9', sc: 1, line: 'Fifteen tongues on&nbsp;the&nbsp;full-size Shelton body.' }];
   if (RU) [['New Wave 15', 'Пятнадцать язычков, каждый настроен на&nbsp;ноту с&nbsp;обертонами.', '88&nbsp;000&nbsp;₽'],
     ['Мини Шелтон 10', 'Компактная: десять язычков в&nbsp;корпусе поменьше.', '96&nbsp;000&nbsp;₽'],
     ['Шелтон 10', 'Десять язычков на&nbsp;полноразмерном корпусе Шелтон.', '108&nbsp;000&nbsp;₽'],
     ['Шелтон 15', 'Пятнадцать язычков на&nbsp;полноразмерном корпусе Шелтон.', '120&nbsp;000&nbsp;₽']].forEach(([name, line, price], i) => Object.assign(MODELS[i], { name, line, price }));
   /* B2 «Зеркало»: справа вверху имя и описание модели, справа внизу паспорт; слева внизу список моделей с ценами */
   const textHTML = m => `<div class="mtext"><h3 class="mname t-big"><span>${m.name}</span></h3><p class="mline t-body">${m.line}</p></div>`;
-  const specHTML = m => `<li><span class="k">${T.diam}</span><span class="v" data-s="d">${m.d}&nbsp;${T.cm}</span></li><li><span class="k">${T.tongues}</span><span class="v" data-s="n">${m.n}</span></li><li><span class="k">${T.price}</span><span class="v" data-s="price">${m.price}</span></li>`;
+  const specHTML = m => `<li><span class="k">${T.diam}</span><span class="v" data-s="d">${m.d}&nbsp;${T.cm}</span></li><li><span class="k">${T.tongues}</span><span class="v" data-s="n">${m.n}</span></li><li><span class="k">${T.price}</span><span class="v" data-s="price">${T.from}${m.price}</span></li>`;
   const mSec = $('.models'), mStage = $('.mstage');
   /* выбор модели кнопками (правка команды: скролл не всем очевиден) */
   const HOLD = .7, MOVE = 1, STEP = MOVE + HOLD, total = HOLD + 3 * STEP;
   let mST = null, goY = y => scrollTo(0, y);
   const pick = $('.mpick');
-  pick.innerHTML = MODELS.map((m, i) => `<li><button type="button" data-k="${i}"${i ? '' : ' aria-current="true"'}><span class="t-small">0${i + 1}</span><span class="n">${m.name}</span><span class="p">${m.price}</span></button></li>`).join('');
+  pick.innerHTML = MODELS.map((m, i) => `<li><button type="button" data-k="${i}"${i ? '' : ' aria-current="true"'}><span class="t-small">0${i + 1}</span><span class="n">${m.name}</span><span class="p">${T.from}${m.price}</span></button></li>`).join('');
   const pickBtns = $$('.mpick button');
   const markPick = k => pickBtns.forEach((b, i) => b.setAttribute('aria-current', i === k));
   pickBtns.forEach((b, k) => b.addEventListener('click', () => { markPick(k);
@@ -537,7 +537,7 @@
     let curK = -1;
     /* номер, число язычков и цена в паспорте меняются вместе с именем; короткое мигание значений, чтобы смена была заметна */
     const setK = k => { if (k === curK) return; const first = curK < 0; curK = k; num.textContent = `0${k + 1} / 04`; markPick(k);
-      specD.innerHTML = MODELS[k].d + '&nbsp;' + T.cm; specN.textContent = MODELS[k].n; specP.innerHTML = MODELS[k].price;
+      specD.innerHTML = MODELS[k].d + '&nbsp;' + T.cm; specN.textContent = MODELS[k].n; specP.innerHTML = T.from + MODELS[k].price;
       if (!first) gsap.fromTo([specD, specN, specP], { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, duration: .45, ease: 'power2.out' }); };
     setK(0);
     mST = ScrollTrigger.create({ trigger: mSec, start: () => 'top top+=' + $('.topbar').offsetHeight, end: 'bottom bottom', scrub: .8, animation: mTl, invalidateOnRefresh: true,
