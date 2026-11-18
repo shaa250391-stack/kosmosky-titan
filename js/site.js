@@ -66,35 +66,58 @@
   [14, 15, 16].forEach(m => { dashed.push([m, 12], [m, 13]); });
   let W = 0, H = 0, DPR = 1, yaw = .6, pitch = -.38, tYaw = 0, tPitch = 0, drawIn = motionOn ? 0 : 1;
   const sizeLat = () => { const r = cv.getBoundingClientRect(); W = r.width; H = r.height; DPR = Math.min(devicePixelRatio || 1, 2); cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0); };
-  const proj = ([x, y, z]) => {
-    const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
-    let X = x * cy - z * sy, Z = x * sy + z * cy;
-    let Y = y * cp - Z * sp; Z = y * sp + Z * cp;
-    const f = 4.2, s = Math.min(W * .9, H - 70) * .4 * f / (f + Z);
-    return [W / 2 + X * s, (H - 44) * .5 - Y * s, Z];
-  };
-  const drawLat = () => {
-    ctx.clearRect(0, 0, W, H);
-    const P = pts.map(o => proj(o.p));
-    const line = (a, b, dash, alpha, col) => { const A = P[a], B = P[b];
+  /* 02: та же решётка крупно. По скроллу она вылетает из ячейки первого экрана и встаёт в центр экрана 02 – как каркас инструмента в 07.
+     fp – прогресс перелёта (0 – в ячейке, 1 – на экране 02), crp – прогресс экрана 02 после остановки: решётка доворачивается.
+     Во время перелёта решётка рисуется на холсте поверх страницы между живыми положениями ячейки и экрана, поэтому движение непрерывное */
+  const scv = $('.cr-main'), sctx = scv.getContext('2d'), fly = document.createElement('canvas'), fctx = fly.getContext('2d');
+  fly.className = 'cr-fly'; fly.setAttribute('aria-hidden', 'true'); document.body.append(fly);
+  let sW = 0, sH = 0, sCy = 0, sS = 0, sTop = 0, fp = 0, crp = 0, flyOn = false;
+  const sizeStage = () => { const b = scv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); sW = b.width; sH = b.height; scv.width = sW * d; scv.height = sH * d; sctx.setTransform(d, 0, 0, d, 0, 0);
+    const tB = $('.cr-title').getBoundingClientRect().bottom - b.top, xT = $('.cr-text').getBoundingClientRect().top - b.top;
+    sTop = parseFloat(getComputedStyle($('.cr-stage')).top) || 0;
+    sCy = (tB + xT) / 2; sS = Math.max(40, Math.min(sW * (mob() ? .26 : .15), (xT - tB - 40) * .36));
+    fly.width = innerWidth * d; fly.height = innerHeight * d; fctx.setTransform(d, 0, 0, d, 0, 0); };
+  /* решётка в точке (cx, cy) с масштабом s; glow – синее свечение, как у каркаса в 07 (0 в ячейке, 1 на экране 02) */
+  const drawLatTo = (g, cx, cy, s, glow) => {
+    const cyw = Math.cos(yaw), syw = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch), f = 4.2, k = Math.sqrt(s / 150);
+    const P = pts.map(({ p: [x, y, z] }) => { const X = x * cyw - z * syw, Z1 = x * syw + z * cyw, Y = y * cp - Z1 * sp, Z = y * sp + Z1 * cp, m = s * f / (f + Z);
+      return [cx + X * m, cy - Y * m, Z]; });
+    if (glow > 0) { const R2 = s * 2.6, gr = g.createRadialGradient(cx, cy, 0, cx, cy, R2);
+      gr.addColorStop(0, `rgba(58,91,217,${(.2 * glow).toFixed(3)})`); gr.addColorStop(.55, `rgba(58,91,217,${(.05 * glow).toFixed(3)})`); gr.addColorStop(1, 'rgba(58,91,217,0)');
+      g.fillStyle = gr; g.fillRect(cx - R2, cy - R2, R2 * 2, R2 * 2); }
+    const line = (a, b, dash, alpha) => { const A = P[a], B = P[b];
       const depth = (A[2] + B[2]) / 2, al = alpha * (.55 + .45 * (1 - (depth + 1.2) / 2.4));
-      ctx.setLineDash(dash); ctx.strokeStyle = col.replace('A', al.toFixed(3)); ctx.beginPath();
-      ctx.moveTo(A[0], A[1]); ctx.lineTo(A[0] + (B[0] - A[0]) * drawIn, A[1] + (B[1] - A[1]) * drawIn); ctx.stroke(); };
-    ctx.lineWidth = 1;
-    dashed.forEach(([a, b]) => line(a, b, [3, 4], .5, 'rgba(236,234,229,A)'));
-    edges.forEach(([a, b]) => line(a, b, [], .9, 'rgba(236,234,229,A)'));
-    ctx.setLineDash([]);
+      g.setLineDash(dash.map(v => v * k)); g.strokeStyle = `rgba(236,234,229,${al.toFixed(3)})`; g.beginPath();
+      g.moveTo(A[0], A[1]); g.lineTo(A[0] + (B[0] - A[0]) * drawIn, A[1] + (B[1] - A[1]) * drawIn); g.stroke(); };
+    g.lineWidth = Math.min(1.6, k);
+    dashed.forEach(([a, b]) => line(a, b, [3, 4], .5));
+    edges.forEach(([a, b]) => line(a, b, [], .9));
+    g.setLineDash([]);
     pts.map((o, i) => ({ o, q: P[i] })).sort((a, b) => b.q[2] - a.q[2]).forEach(({ o, q }) => {
-      const r = (o.kind === 'm' ? 4.2 : 3.2) * (4.2 / (4.2 + q[2])) * drawIn;
+      const r = (o.kind === 'm' ? 4.2 : 3.2) * k * (4.2 / (4.2 + q[2])) * drawIn;
       if (r <= 0) return;
-      ctx.fillStyle = o.kind === 'm' ? '#6F8BFF' : '#ECEAE5';
-      ctx.globalAlpha = .35 + .65 * (1 - (q[2] + 1.2) / 2.4);
-      ctx.beginPath(); ctx.arc(q[0], q[1], r, 0, 6.283); ctx.fill();
-      if (o.kind === 'm') { ctx.globalAlpha *= .25; ctx.beginPath(); ctx.arc(q[0], q[1], r + 7, 0, 6.283); ctx.fill(); }
+      g.fillStyle = o.kind === 'm' ? '#6F8BFF' : '#ECEAE5';
+      g.globalAlpha = .35 + .65 * (1 - (q[2] + 1.2) / 2.4);
+      g.beginPath(); g.arc(q[0], q[1], r, 0, 6.283); g.fill();
+      if (o.kind === 'm') { g.globalAlpha *= .25; g.beginPath(); g.arc(q[0], q[1], r + 7 * k, 0, 6.283); g.fill(); }
     });
-    ctx.globalAlpha = 1;
+    g.globalAlpha = 1;
   };
-  sizeLat(); drawLat(); addEventListener('resize', () => { sizeLat(); drawLat(); sizeRow(); });
+  const ez2 = t => t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
+  const drawLat = () => {
+    ctx.clearRect(0, 0, W, H); sctx.clearRect(0, 0, sW, sH);
+    if (flyOn) { fctx.clearRect(0, 0, innerWidth, innerHeight); flyOn = false; }
+    const hx = W / 2, hy = (H - 44) * .5, hs = Math.min(W * .9, H - 70) * .4;
+    /* без движения решётка стоит и в ячейке, и на экране 02 */
+    if (!motionOn) { drawLatTo(ctx, hx, hy, hs, 0); drawLatTo(sctx, sW / 2, sCy, sS, 1); return; }
+    if (fp <= 0) drawLatTo(ctx, hx, hy, hs, 0);
+    else if (fp >= 1) { if (scv.getBoundingClientRect().bottom > 0) drawLatTo(sctx, sW / 2, sCy, sS, 1); }
+    /* цель – место, где экран 02 остановится (sTop), а не его текущее положение: так решётка летит прямо, без провала вниз */
+    else { const a = cv.getBoundingClientRect(), b = scv.getBoundingClientRect(), e = ez2(fp), ax = a.left + hx, ay = a.top + hy;
+      drawLatTo(fctx, ax + (b.left + sW / 2 - ax) * e, ay + (sTop + sCy - ay) * e, hs + (sS - hs) * e, e); flyOn = true; }
+  };
+  sizeLat(); sizeStage(); drawLat(); addEventListener('resize', () => { sizeLat(); sizeStage(); drawLat(); sizeRow(); });
+  document.fonts.ready.then(() => { sizeStage(); drawLat(); });
   const latCell = $('.c-lattice');
   addEventListener('pointermove', e => { tYaw = (e.clientX / innerWidth - .5) * 1.2; tPitch = (e.clientY / innerHeight - .5) * .6; });
 
@@ -335,6 +358,29 @@
       if (lOn) { lT += dt; const tY = .4 + lp * 2.2 + lT * .03 + lMx * .25, tP = .55 - lp * .35 + lMy * .12; lYaw += (tY - lYaw) * .05; lPitch += (tP - lPitch) * .05; drawL(); }
       requestAnimationFrame(loopL); })(lLast);
   }
+  /* 02: та же объёмная решётка на фоне, что у 08, только светлая на тёмном. Медленно вращается, доворачивается прокруткой экрана (crp) */
+  const bcv = $('.cr-bg'), bc = bcv.getContext('2d');
+  let bW = 0, bH = 0, bYaw = .4, bPitch = .55, bT = 0, bOn = false;
+  const sizeB = () => { const b = bcv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); bW = b.width; bH = b.height; bcv.width = bW * d; bcv.height = bH * d; bc.setTransform(d, 0, 0, d, 0, 0); };
+  const drawB = () => {
+    bc.clearRect(0, 0, bW, bH);
+    const cy = Math.cos(bYaw), sy = Math.sin(bYaw), cp = Math.cos(bPitch), sp = Math.sin(bPitch), sc = Math.max(bW, bH) * .17, f = 7;
+    const P = LP.map(([x, y, z]) => { const X = x * cy - z * sy, Z1 = x * sy + z * cy, Y = y * cp - Z1 * sp, Z = y * sp + Z1 * cp, k = sc * f / (f + Z);
+      return [bW * .5 + X * k, bH * .5 - Y * k, Z]; });
+    bc.lineWidth = .8;
+    for (let bkt = 0; bkt < 5; bkt++) { const lo = -4 + bkt * 1.6, hi = lo + 1.6; bc.beginPath();
+      LE.forEach(([a, b]) => { const z = (P[a][2] + P[b][2]) / 2; if (z < lo || z >= hi) return; bc.moveTo(P[a][0], P[a][1]); bc.lineTo(P[b][0], P[b][1]); });
+      bc.strokeStyle = `rgba(236,234,229,${(.09 - bkt * .016).toFixed(3)})`; bc.stroke(); }
+    P.forEach(q => { const a = Math.max(.04, .22 - (q[2] + 4) * .022); bc.fillStyle = `rgba(236,234,229,${a.toFixed(3)})`; bc.beginPath(); bc.arc(q[0], q[1], 1.6 * 7 / (7 + q[2]), 0, 6.283); bc.fill(); });
+  };
+  sizeB(); drawB(); addEventListener('resize', () => { sizeB(); drawB(); });
+  if (motionOn) {
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { bOn = es[0].isIntersecting; }).observe($('.cr-stage'));
+    let bLast = performance.now();
+    (function loopB(now) { const dt = Math.min(.05, (now - bLast) / 1000); bLast = now;
+      if (bOn) { bT += dt; const tY = .4 + crp * 1.6 + bT * .03 + tYaw * .2, tP = .55 - crp * .3 + tPitch * .2; bYaw += (tY - bYaw) * .05; bPitch += (tP - bPitch) * .05; drawB(); }
+      requestAnimationFrame(loopB); })(bLast);
+  }
 
   /* Сумма: окошки-барабаны */
   const sumEl = $('.sum'), rolls = [];
@@ -361,7 +407,7 @@
     lenis.raf(t * 1000); const s = dt / 1000;
     stepMarquee(s);
     autoYaw += s * .22;
-    yaw += (autoYaw + tYaw - yaw) * .06; pitch += (-.38 + tPitch - pitch) * .06;
+    yaw += (autoYaw + tYaw + crp * 1.4 - yaw) * .06; pitch += (-.38 + tPitch - pitch) * .06;
     drawLat();
   });
   gsap.ticker.lagSmoothing(0);
@@ -391,6 +437,18 @@
     .to('.c-specs .in', { opacity: 1, duration: .6, stagger: .04 }, '<.15')
     .add(() => { lenis.start(); }, '<');
   var drawState;
+
+  /* ---------- 02. Решётка: перелёт из первого экрана, затем метка, заголовок и текст ---------- */
+  const crTop = () => parseFloat(getComputedStyle($('.cr-stage')).top) || 0;
+  ScrollTrigger.create({ trigger: '#crystal', start: 'top bottom', end: () => 'top top+=' + crTop(), invalidateOnRefresh: true, onUpdate: st => { fp = st.progress; } });
+  ScrollTrigger.create({ trigger: '#crystal', start: () => 'top top+=' + crTop(), end: 'bottom bottom', invalidateOnRefresh: true, onUpdate: st => { crp = st.progress; } });
+  const crSplit = new SplitText('.cr-title', { type: 'lines', mask: 'lines' });
+  gsap.set(crSplit.lines, { yPercent: 135 }); gsap.set(['.cr-tag', '.cr-p', '.cr-p2'], { opacity: 0, y: 16 });
+  const crTl = gsap.timeline({ paused: true }).to('.cr-tag', { opacity: 1, y: 0, duration: 1, ease: 'expo.out' })
+    .to(crSplit.lines, { yPercent: 0, duration: 1.4, stagger: .12, ease: 'expo.out' }, '<');
+  const crTl2 = gsap.timeline({ paused: true }).to(['.cr-p', '.cr-p2'], { opacity: 1, y: 0, duration: 1.2, stagger: .1, ease: 'expo.out' });
+  ScrollTrigger.create({ trigger: '#crystal', start: 'top 35%', onEnter: () => crTl.play(), onLeaveBack: () => crTl.reverse() });
+  ScrollTrigger.create({ trigger: '#crystal', start: 'top 5%', onEnter: () => crTl2.play(), onLeaveBack: () => crTl2.reverse() });
 
   /* ---------- 03. Почему первый ---------- */
   const fLead = new SplitText('.first-lead', { type: 'lines', mask: 'lines' });

@@ -53,7 +53,8 @@ p,.t-body,.mline{text-wrap:pretty}
 .c-title-top{display:flex;justify-content:space-between;color:var(--mute)}
 .hero-title{max-width:12em}
 .hero-title .ln{position:relative;display:block;width:fit-content}
-.plate{position:absolute;inset:.06em -.04em .02em;background:var(--fg);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+/* плашка шире строки: хвосты «р», «у», «ф», «д» и левый вынос букв у Onest выходят за строку на .03em (заголовок) и до .12em (.t-done) – замер 19.11 */
+.plate{position:absolute;inset:0 -.1em -.12em;background:var(--fg);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
 
 /* Видео */
 .c-video{grid-column:8/13;grid-row:1/3;padding:0;cursor:none}
@@ -268,6 +269,7 @@ html:not(.has-motion) .p-cell{height:min(78svh,720px)}
 .c-done{grid-column:1/8;display:flex;flex-direction:column;justify-content:space-between;gap:clamp(40px,8vh,96px);min-height:clamp(420px,56vh,600px)}
 .c-done .t-mid{max-width:17em}
 .t-done .ln{position:relative;display:block;width:fit-content}
+.t-done .plate{bottom:-.17em}
 .c-portrait{grid-column:8/13;grid-row:1/4;padding:0;min-height:560px}
 .c-portrait img{position:absolute;inset:0;width:100%;max-width:none;height:100%;object-fit:cover;object-position:50% 30%}
 .c-portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 65%,rgba(7,8,11,.75));pointer-events:none}
@@ -360,11 +362,29 @@ body.is-light .topbar .c-logo svg{color:var(--fg)}
 .rare-photo img{position:absolute;inset:0;width:100%;max-width:none;height:100%;object-fit:cover}
 .rare-photo span{position:absolute;left:8px;bottom:6px;color:#ECEAE5;font:400 11px/1.2 var(--sans)}
 /* подпись блока – строкой над заголовком, как у ячеек (номер слева, название справа); раньше висела в углу поверх заголовка */
-.rare-tag{position:relative;z-index:1;display:flex;justify-content:space-between;color:#8B8D96}
+.rare-tag,.cr-tag{position:relative;z-index:1;display:flex;justify-content:space-between;color:#8B8D96}
 .rare.is-on .rare-photo{opacity:1}
 html:not(.has-motion) .rare{height:auto}
 html:not(.has-motion) .rare-stage{position:relative;top:0;height:100svh}
 html:not(.has-motion) .rare-photo{opacity:1}
+/* 02 Кристаллическая решётка: композиция экрана 07 «Сделано руками» – метка, заголовок по центру, решётка между ним и текстом.
+   Решётка прилетает из ячейки первого экрана: на время перелёта она рисуется на .cr-fly – холсте поверх страницы (декор, fixed) */
+.crystal{position:relative;height:200vh;background:var(--void);color:#ECEAE5}
+.cr-stage{position:sticky;top:calc(var(--g) + var(--tb));height:calc(100svh - var(--g) - var(--tb));overflow:hidden;display:flex;flex-direction:column;gap:24px;padding:clamp(24px,4vh,48px) var(--g) clamp(24px,5vh,56px)}
+.cr-stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.cr-title{position:relative;z-index:1;max-width:14em;margin-inline:auto;text-align:center}
+.cr-title>div{padding-block:.08em .2em;margin-block:-.08em -.2em}
+/* свои классы, не .rare-text: скрипт 07 ищет первый .rare-text на странице, чтобы вписать каркас – общий класс увёл его в 02 */
+.cr-text{position:relative;z-index:1;margin-top:auto;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--g);align-items:end}
+.cr-p{grid-column:1/5;max-width:34ch;font-weight:500}
+.cr-p2{grid-column:9/13;max-width:44ch}
+/* абзацы 02 – ровный край без коротких хвостов */
+.cr-p,.cr-p2{text-wrap:balance}
+.cr-fly{position:fixed;inset:0;z-index:40;width:100%;height:100%;pointer-events:none}
+html:not(.has-motion) .crystal{height:auto}
+html:not(.has-motion) .cr-stage{position:relative;top:0;height:100svh}
+@media (max-width:768px){ .crystal{height:180vh} .cr-title{font-size:clamp(28px,7.4vw,40px)} .cr-text{row-gap:12px} .cr-p,.cr-p2{grid-column:1/-1}
+  .cr-stage{padding-inline:calc(var(--g) + var(--pad))} }
 /* телефон: заголовок паузы 09 мельче шкалового .t-hero (40 px) – иначе по одному слову в строке; исключение из шкалы, записано в базе */
 @media (max-width:768px){ .rare-title{font-size:clamp(28px,7.4vw,40px)} }
 @media (max-width:768px){ .rare{height:240vh} .rare-photo{display:none} .rare-p{display:none} .rare-list{grid-column:1/-1;grid-template-columns:1fr;gap:12px} .rare-list li{flex-direction:row;gap:14px} .rare-list span{flex:none;width:2em}
