@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
 <link rel="stylesheet" href="styles/tokens.css?v=2">
-<link rel="stylesheet" href="styles/site.css?v=19">
+<link rel="stylesheet" href="styles/site.css?v=26">
 </head>
 <body>
 
@@ -76,8 +76,7 @@
 
     <div class="cell c-lattice" id="lattice">
       <canvas aria-hidden="true"></canvas>
-      <span class="lat-tag t-small in">Crystal lattice</span>
-      <div class="lat-cap t-small in"><b>Titanium, hexagonal close-packed</b><span>a&nbsp;= 2.95&nbsp;Å, c&nbsp;= 4.68&nbsp;Å</span></div>
+      <div class="lat-cap t-small in"><b>Crystal lattice of&nbsp;titanium</b><span>a&nbsp;= 2.95&nbsp;Å, c&nbsp;= 4.68&nbsp;Å</span></div>
     </div>
 
     <div class="cell c-specs">
@@ -85,33 +84,29 @@
       <ul class="specs t-small">
         <li><span class="k in">Material</span><span class="lead"></span><span class="v in">Titanium</span></li>
         <li><span class="k in">Weight vs.&nbsp;steel</span><span class="lead"></span><span class="v in">~42.5% lighter</span></li>
-        <li><span class="k in">Coating</span><span class="lead"></span><span class="v in">None needed</span></li>
-        <li><span class="k in">Development</span><span class="lead"></span><span class="v in">9&nbsp;months</span></li>
+        <li><span class="k in">Coating</span><span class="lead"></span><span class="v in">Oxide film</span></li>
       </ul>
     </div>
 
     <div class="cell c-marquee t-ui" aria-label="Our path">
-      <div class="track-row"><span>Sourced a&nbsp;rare grade of&nbsp;titanium sheet</span><span>Formed the&nbsp;bowls from a&nbsp;flat sheet</span><span>Cut and&nbsp;tuned the&nbsp;tongues</span><span>Polished, fired, joined the&nbsp;halves</span><span>Final tuning</span><span>Prize draw for&nbsp;participants</span></div>
+      <div class="track-row"><span>Sourced a&nbsp;rare grade of&nbsp;titanium sheet</span><span>Formed the&nbsp;bowls from a&nbsp;flat sheet</span><span>Cut and&nbsp;tuned the&nbsp;tongues</span><span>Polished</span><span>Fired</span><span>Joined the&nbsp;halves</span><span>Fine-tuned</span></div>
     </div>
   </div>
 </section>
 
-<section id="closeup" class="block closeup">
-  <div class="cu-stage">
-    <div class="cu-frame">
-      <img class="cu-poster" src="assets/img/d-fly-poster.webp" alt="The camera glides low over the titanium tongues" width="1920" height="1080">
-      <video muted playsinline preload="none" aria-hidden="true" data-fly-d="assets/video/fly-d.mp4" data-fly-m="assets/video/fly-m.mp4"></video>
+<section id="laser" class="block">
+  <div class="grid-2 grid-band">
+    <div class="cell c-band">
+      <div class="band-frame"><img src="assets/img/d-laser-clean.webp" alt="A fibre laser cutting a titanium sheet in the workshop" width="1672" height="941" loading="lazy"></div>
+      <div class="band-cap">
+        <div class="cell-top t-small"><span>02</span><span>Laser cutting</span></div>
+        <p class="band-title t-big">The&nbsp;sound begins long before the&nbsp;first touch</p>
+      </div>
     </div>
-    <div class="cu-cap">
-      <div class="cell-top t-small"><span>02</span><span>Video review</span></div>
-      <button class="cu-yt" type="button" aria-label="Play the full video review"><i aria-hidden="true"></i><span class="t-mid">Watch the&nbsp;full review</span><small class="t-small">YouTube</small></button>
-      <p class="cu-title t-big">Every tongue, up&nbsp;close</p>
-    </div>
-    <div class="cu-bar" aria-hidden="true"><i></i></div>
   </div>
 </section>
 
-<section id="first" class="block">
+<section id="first" class="block" hidden>
   <div class="grid-first">
     <div class="cell c-first">
       <div class="cell-top t-small"><span>03</span><span>Why the&nbsp;first</span></div>
@@ -126,9 +121,9 @@
 <section id="material" class="block">
   <div class="grid-mat">
     <div class="cell c-why">
-      <div class="cell-top t-small"><span>04</span><span>The&nbsp;material</span></div>
+      <div class="cell-top t-small"><span>03</span><span>The&nbsp;material</span></div>
       <h2 class="t-done">Why titanium?</h2>
-      <p class="t-mid">Since 2013&nbsp;we have been experimenting and&nbsp;researching non-stop. We have made more than ten models, and&nbsp;many of&nbsp;them still have no&nbsp;equivalent.</p>
+      <p class="t-mid">Titanium is a&nbsp;metal of&nbsp;the&nbsp;space industry. It is light and&nbsp;incredibly strong, and&nbsp;it stands up to&nbsp;corrosion and&nbsp;temperature swings. When heated, it takes on&nbsp;cosmic hues: blue, purple, bronze, gold.</p>
     </div>
     <div class="cell c-tints">
       <div class="cell-top t-small"><span>Heat tints</span><span>Titanium oxide</span></div>
@@ -140,7 +135,7 @@
       </ul>
     </div>
     <div class="cell c-mat">
-      <p class="t-body">Titanium is a&nbsp;metal of&nbsp;the&nbsp;space industry. It is light and&nbsp;incredibly strong, and&nbsp;it stands up to&nbsp;corrosion and&nbsp;temperature swings. When heated, it takes on&nbsp;cosmic hues: blue, purple, bronze, gold.</p>
+      <p class="t-body">Since 2013&nbsp;we have been experimenting and&nbsp;researching non-stop. We have made more than ten models, and&nbsp;many of&nbsp;them still have no&nbsp;equivalent.</p>
     </div>
     <div class="cell c-mat">
       <p class="t-body">Making a&nbsp;tongue drum from titanium instead of&nbsp;the&nbsp;usual steel is a&nbsp;challenge on&nbsp;the&nbsp;way to&nbsp;a&nbsp;new, relaxing sound. It is very hard to&nbsp;work with, but the&nbsp;result is worth it.</p>
@@ -148,103 +143,24 @@
   </div>
 </section>
 
-<section id="community" class="block">
-  <div class="grid-2">
-    <div class="cell c-band">
-      <div class="band-frame"><img src="assets/img/d-laser-hq.webp" alt="A fibre laser cutting a titanium sheet in the workshop" width="1672" height="941" loading="lazy"></div>
-      <div class="band-cap">
-        <div class="cell-top t-small"><span>05</span><span>Laser cutting</span></div>
-        <p class="band-title t-big">Cut and&nbsp;tuned the&nbsp;tongues</p>
-      </div>
+<section id="closeup" class="block closeup">
+  <div class="cu-stage">
+    <div class="cu-frame">
+      <img class="cu-poster" src="assets/img/d-fly-poster.webp" alt="The camera glides low over the titanium tongues" width="1920" height="1080">
+      <video muted playsinline preload="none" aria-hidden="true" data-fly-d="assets/video/fly-d.mp4" data-fly-m="assets/video/fly-m.mp4"></video>
     </div>
-
-    <div class="cell c-state">
-      <div class="cell-top t-small"><span>Community</span><span>The&nbsp;experiment</span></div>
-      <p class="manifest t-big">We invited our followers to&nbsp;join an&nbsp;unusual experiment: building a&nbsp;tongue drum from a&nbsp;material we had never worked with before.</p>
+    <div class="cu-cap">
+      <div class="cell-top t-small"><span>04</span><span>Video review</span></div>
+      <button class="cu-yt" type="button" aria-label="Play the full video review"><i aria-hidden="true"></i><span class="t-mid">Watch the&nbsp;full review</span><small class="t-small">YouTube</small></button>
     </div>
-
-    <div class="cell c-tune">
-      <img src="assets/img/d-shelf.webp" alt="A bowl with the tongues cut out, in the workshop" width="1000" height="1500" loading="lazy">
-      <div class="tune-cap t-small"><span>In&nbsp;the&nbsp;workshop</span></div>
-    </div>
-
-    <div class="cell c-num c-45" id="numbers" aria-hidden="true">
-      <div class="cell-top t-small"><span>Participants</span></div>
-      <span class="t-num">45</span>
-      <span class="viz sq"></span>
-    </div>
-    <div class="cell c-num c-10" aria-hidden="true">
-      <div class="cell-top t-small"><span>Countries</span></div>
-      <span class="t-num">10</span>
-      <span class="viz br"></span>
-    </div>
-
-    <div class="cell c-joined">
-      <h2 class="t-mid">45&nbsp;people from 10&nbsp;countries joined us.</h2>
-      <p class="t-body">Participants helped make decisions at&nbsp;every stage.</p>
-    </div>
-  </div>
-</section>
-
-<section id="money" class="block">
-  <div class="grid-3">
-    <div class="cell c-photo">
-      <img src="assets/img/c-gold.webp" alt="A titanium bowl blank with the tongues marked out, in the workshop" width="2400" height="1600" loading="lazy">
-      <span class="photo-cap t-small">From the&nbsp;workshop</span>
-    </div>
-    <div class="cell c-sum">
-      <div class="cell-top t-small"><span>06</span><span>Funding</span></div>
-      <p class="sum" aria-label="$1,900"></p>
-      <div class="sum-txt"><p class="sum-cap t-big">That’s how much we raised to&nbsp;make the&nbsp;experiment happen.</p>
-        <p class="sum-note t-body">Every participant received a&nbsp;titanium keepsake, and&nbsp;one of&nbsp;them won the&nbsp;finished drum in&nbsp;a&nbsp;closed prize draw.</p></div>
-    </div>
-    <div class="cell c-knew">
-      <div class="cell-top t-small"><span>Risk</span></div>
-      <p class="t-mid">People joined knowing it was an&nbsp;experiment and&nbsp;that it might not work out.</p>
-    </div>
-    <div class="cell c-trust">
-      <div class="cell-top t-small"><span>Trust</span></div>
-      <p class="t-mid">That trust means a&nbsp;great deal to&nbsp;us.</p>
-    </div>
-  </div>
-</section>
-
-<section id="path" class="block path">
-  <div class="path-pin">
-    <div class="path-track">
-      <div class="p-cell p-intro">
-        <div class="cell-top t-small"><span>07</span><span>The&nbsp;path</span></div>
-        <p class="t-big">A&nbsp;short account of&nbsp;the&nbsp;path we took.</p>
-        <p class="p-hint t-small"><i></i>Keep scrolling</p>
-      </div>
-      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-1.webp" alt="A titanium sheet on the laser cutting bed" loading="lazy"></div>
-        <div class="p-text"><span class="p-num">01</span><p class="t-body">Sourced and&nbsp;ordered a&nbsp;sheet of&nbsp;a&nbsp;rare grade of&nbsp;titanium that we needed.</p></div></div>
-      <div class="p-cell p-stage p-explode"><div class="p-photo"><img src="assets/img/d-path-2.webp" alt="Bowls being formed from a flat sheet" loading="lazy"></div>
-        <div class="p-text"><span class="p-num">02</span><p class="t-body">Formed the&nbsp;bowls from a&nbsp;flat sheet.</p><p class="boom t-small">The&nbsp;first bowl exploded&nbsp;💥</p></div></div>
-      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-3.webp" alt="The laser cutting the tongues into the bowl" loading="lazy"></div>
-        <div class="p-text"><span class="p-num">03</span><p class="t-body">Cut the&nbsp;tongues and&nbsp;tuned them to&nbsp;notes with overtones.</p></div></div>
-      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-4.webp" alt="Joining the two halves of the drum" loading="lazy"></div>
-        <div class="p-text"><span class="p-num">04</span><p class="t-body">Polished, fired in&nbsp;the&nbsp;kiln and&nbsp;joined the&nbsp;halves.</p></div></div>
-      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-5.webp" alt="The maker fine-tuning the titanium drum" loading="lazy"></div>
-        <div class="p-text"><span class="p-num">05</span><p class="t-body">Fine-tuned to&nbsp;perfection.</p></div></div>
-      <div class="p-cell p-draw">
-        <div class="cell-top t-small"><span>Final stage</span></div>
-        <span class="p-num">06</span>
-        <p class="t-mid">Held a&nbsp;prize draw among the&nbsp;participants.</p>
-      </div>
-      <a class="p-cell p-end" href="https://www.instagram.com/kosmosky.global/" target="_blank" rel="noopener">
-        <div class="cell-top t-small"><span>Instagram</span><span aria-hidden="true">↗</span></div>
-        <p class="t-mid">Videos of&nbsp;every stage are in&nbsp;our “Titanium” Instagram highlights.</p>
-      </a>
-    </div>
-    <div class="p-bar" aria-hidden="true"><i></i></div>
+    <div class="cu-bar" aria-hidden="true"><i></i></div>
   </div>
 </section>
 
 <section id="done" class="block">
   <div class="grid-5">
     <div class="cell c-done">
-      <div class="cell-top t-small"><span>08</span><span>Available to&nbsp;order</span></div>
+      <div class="cell-top t-small"><span>05</span><span>Available to&nbsp;order</span></div>
       <h2 class="t-done">We did it!</h2>
       <p class="t-mid">The&nbsp;titanium tongue drum is now available to&nbsp;order.</p>
     </div>
@@ -267,7 +183,7 @@
 <section id="rare" class="rare">
   <div class="rare-stage">
     <canvas aria-hidden="true"></canvas>
-    <div class="rare-tag t-small" aria-hidden="true"><span>09</span><span>Made by&nbsp;hand</span></div>
+    <div class="rare-tag t-small" aria-hidden="true"><span>06</span><span>Made by&nbsp;hand</span></div>
     <h2 class="rare-title t-hero">Titanium instruments will never be mass-produced.</h2>
     <div class="rare-text">
       <p class="rare-p t-body">The&nbsp;material is very expensive, and&nbsp;every instrument takes complex processing and&nbsp;a&nbsp;lot of&nbsp;handwork.</p>
@@ -283,7 +199,7 @@
 <section id="price" class="block light">
   <div class="grid-6">
     <div class="cell c-q">
-      <div class="cell-top t-small"><span>10</span><span>The&nbsp;price</span></div>
+      <div class="cell-top t-small"><span>07</span><span>The&nbsp;price</span></div>
       <h2 class="t-done">Expensive?</h2>
       <div class="answer"><p class="t-mid">Of&nbsp;course it is.</p><p class="t-mid">But the&nbsp;result is worth it.</p></div>
     </div>
@@ -329,11 +245,11 @@
     <canvas class="mlat" aria-hidden="true"></canvas>
     <div class="mgrid">
       <div class="mhead">
-        <div class="cell-top t-small"><span>11</span><span>Models</span></div>
+        <div class="cell-top t-small"><span>08</span><span>Models</span></div>
         <h2 class="t-big">Choose a&nbsp;model, made to&nbsp;order.</h2>
       </div>
       <div class="mright">
-        <div class="cell-top t-small"><span class="mnum">01 / 04</span><span>Titanium</span></div>
+        <div class="cell-top t-small"><span class="mnav"><span class="mnum">01 / 04</span><button class="marr" type="button" data-d="-1" aria-label="Previous model" disabled>←</button><button class="marr" type="button" data-d="1" aria-label="Next model">→</button></span><span>Titanium</span></div>
         <div class="mtexts"><div class="mtext"><h3 class="mname t-big"><span>New Wave 15</span></h3><p class="mline t-body">Fifteen tongues, each tuned to&nbsp;a&nbsp;note with overtones.</p></div></div>
       </div>
       <div class="mbuy-l">
@@ -347,6 +263,95 @@
     </div>
   </div>
 </section>
+<section id="community" class="block">
+  <div class="grid-2">
+    <div class="cell c-state">
+      <div class="cell-top t-small"><span>09</span><span>The&nbsp;experiment</span></div>
+      <h2 class="t-done">How did it all begin?</h2>
+      <div class="state-text">
+        <p class="state-lead t-mid">The&nbsp;instrument was born from a&nbsp;bold idea and&nbsp;a&nbsp;belief that it&nbsp;would work.</p>
+        <p class="manifest t-big">We invited our followers to&nbsp;join an&nbsp;unusual experiment: building a&nbsp;tongue drum from a&nbsp;material we had never worked with before.</p>
+      </div>
+    </div>
+
+    <div class="cell c-tune">
+      <img src="assets/img/d-shelf.webp" alt="A bowl with the tongues cut out, in the workshop" width="1000" height="1500" loading="lazy">
+      <div class="tune-cap t-small"><span>In&nbsp;the&nbsp;workshop</span></div>
+    </div>
+
+    <div class="cell c-num c-45" id="numbers" aria-hidden="true">
+      <div class="cell-top t-small"><span>Participants</span></div>
+      <span class="t-num">45</span>
+      <span class="viz sq"></span>
+    </div>
+    <div class="cell c-num c-10" aria-hidden="true">
+      <div class="cell-top t-small"><span>Countries</span></div>
+      <span class="t-num">10</span>
+      <span class="viz br"></span>
+    </div>
+
+    <div class="cell c-joined">
+      <h2 class="t-mid">45&nbsp;people from 10&nbsp;countries joined us.</h2>
+      <p class="t-body">Participants helped make decisions at&nbsp;every stage.</p>
+    </div>
+  </div>
+</section>
+
+<section id="money" class="block">
+  <div class="grid-3">
+    <div class="cell c-photo">
+      <img src="assets/img/c-gold.webp" alt="A titanium bowl blank with the tongues marked out, in the workshop" width="2400" height="1600" loading="lazy">
+      <span class="photo-cap t-small">From the&nbsp;workshop</span>
+    </div>
+    <div class="cell c-sum">
+      <div class="cell-top t-small"><span>10</span><span>Funding</span></div>
+      <p class="sum" aria-label="$1,900"></p>
+      <div class="sum-txt"><p class="sum-cap t-big">That’s how much we raised to&nbsp;make the&nbsp;experiment happen.</p>
+        <p class="sum-note t-body">Every participant received a&nbsp;titanium keepsake, and&nbsp;one of&nbsp;them won the&nbsp;finished drum in&nbsp;a&nbsp;closed prize draw.</p></div>
+    </div>
+    <div class="cell c-knew">
+      <div class="cell-top t-small"><span>Risk</span></div>
+      <p class="t-mid">People joined knowing it was an&nbsp;experiment and&nbsp;that it might not work out.</p>
+    </div>
+    <div class="cell c-trust">
+      <div class="cell-top t-small"><span>Trust</span></div>
+      <p class="t-mid">That trust means a&nbsp;great deal to&nbsp;us.</p>
+    </div>
+  </div>
+</section>
+
+<section id="path" class="block path">
+  <div class="path-pin">
+    <div class="path-track">
+      <div class="p-cell p-intro">
+        <div class="cell-top t-small"><span>11</span><span>The&nbsp;path</span></div>
+        <p class="t-big">A&nbsp;short account of&nbsp;the&nbsp;path we took.</p>
+        <p class="p-hint t-small"><i></i>Keep scrolling</p>
+      </div>
+      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-1.webp" alt="A titanium sheet on the laser cutting bed" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">01</span><p class="t-body">Sourced and&nbsp;ordered a&nbsp;sheet of&nbsp;a&nbsp;rare grade of&nbsp;titanium that we needed.</p></div></div>
+      <div class="p-cell p-stage p-explode"><div class="p-photo"><img src="assets/img/d-path-2.webp" alt="Bowls being formed from a flat sheet" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">02</span><p class="t-body">Formed the&nbsp;bowls from a&nbsp;flat sheet.</p><p class="boom t-small">The&nbsp;first bowl exploded&nbsp;💥</p></div></div>
+      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-3.webp" alt="The laser cutting the tongues into the bowl" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">03</span><p class="t-body">Cut the&nbsp;tongues and&nbsp;tuned them to&nbsp;notes with overtones.</p></div></div>
+      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-4.webp" alt="Joining the two halves of the drum" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">04</span><p class="t-body">Polished, fired in&nbsp;the&nbsp;kiln and&nbsp;joined the&nbsp;halves.</p></div></div>
+      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-5.webp" alt="The maker fine-tuning the titanium drum" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">05</span><p class="t-body">Fine-tuned to&nbsp;perfection.</p></div></div>
+      <div class="p-cell p-draw">
+        <div class="cell-top t-small"><span>Final stage</span></div>
+        <span class="p-num">06</span>
+        <p class="t-mid">Held a&nbsp;prize draw among the&nbsp;participants.</p>
+      </div>
+      <a class="p-cell p-end" href="https://www.instagram.com/kosmosky.global/" target="_blank" rel="noopener">
+        <div class="cell-top t-small"><span>Instagram</span><span aria-hidden="true">↗</span></div>
+        <p class="t-mid">Videos of&nbsp;every stage are in&nbsp;our “Titanium” Instagram highlights.</p>
+      </a>
+    </div>
+    <div class="p-bar" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
 <section id="follow" class="block light">
   <div class="grid-9">
     <div class="cell c-follow">
@@ -400,6 +405,6 @@
 
 <audio class="track" src="assets/audio/titan-sound-2.m4a" preload="auto" loop></audio>
 
-<script src="js/site.js?v=19"></script>
+<script src="js/site.js?v=22"></script>
 </body>
 </html>

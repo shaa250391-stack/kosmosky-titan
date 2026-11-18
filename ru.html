@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
 <link rel="stylesheet" href="styles/tokens.css?v=2">
-<link rel="stylesheet" href="styles/site.css?v=19">
+<link rel="stylesheet" href="styles/site.css?v=26">
 </head>
 <body>
 
@@ -58,8 +58,7 @@
 
     <div class="cell c-lattice" id="lattice">
       <canvas aria-hidden="true"></canvas>
-      <span class="lat-tag t-small in">Кристаллическая решётка</span>
-      <div class="lat-cap t-small in"><b>Титан, гексагональная плотная упаковка</b><span>a&nbsp;= 2,95&nbsp;Å, c&nbsp;= 4,68&nbsp;Å</span></div>
+      <div class="lat-cap t-small in"><b>Кристаллическая решётка титана</b><span>a&nbsp;= 2,95&nbsp;Å, c&nbsp;= 4,68&nbsp;Å</span></div>
     </div>
 
     <div class="cell c-specs">
@@ -67,33 +66,29 @@
       <ul class="specs t-small">
         <li><span class="k in">Материал</span><span class="lead"></span><span class="v in">Титан</span></li>
         <li><span class="k in">Вес относительно стали</span><span class="lead"></span><span class="v in">легче на&nbsp;~42,5%</span></li>
-        <li><span class="k in">Покрытие</span><span class="lead"></span><span class="v in">Не нужно</span></li>
-        <li><span class="k in">Разработка</span><span class="lead"></span><span class="v in">9&nbsp;месяцев</span></li>
+        <li><span class="k in">Покрытие</span><span class="lead"></span><span class="v in">Оксидная плёнка</span></li>
       </ul>
     </div>
 
     <div class="cell c-marquee t-ui" aria-label="Наш путь">
-      <div class="track-row"><span>Заказали лист редкой марки титана</span><span>Изготовили чаши из&nbsp;плоского листа</span><span>Вырезали и&nbsp;настроили язычки</span><span>Отшлифовали, обожгли, соединили половинки</span><span>Финальная настройка</span><span>Розыгрыш среди участников</span></div>
+      <div class="track-row"><span>Заказали лист редкой марки титана</span><span>Изготовили чаши из&nbsp;плоского листа</span><span>Вырезали и&nbsp;настроили язычки</span><span>Отшлифовали</span><span>Обожгли</span><span>Соединили половинки</span><span>Финально настроили</span></div>
     </div>
   </div>
 </section>
 
-<section id="closeup" class="block closeup">
-  <div class="cu-stage">
-    <div class="cu-frame">
-      <img class="cu-poster" src="assets/img/d-fly-poster.webp" alt="Камера низко пролетает над титановыми язычками" width="1920" height="1080">
-      <video muted playsinline preload="none" aria-hidden="true" data-fly-d="assets/video/fly-d.mp4" data-fly-m="assets/video/fly-m.mp4"></video>
+<section id="laser" class="block">
+  <div class="grid-2 grid-band">
+    <div class="cell c-band">
+      <div class="band-frame"><img src="assets/img/d-laser-clean.webp" alt="Волоконный лазер режет титановый лист в мастерской" width="1672" height="941" loading="lazy"></div>
+      <div class="band-cap">
+        <div class="cell-top t-small"><span>02</span><span>Лазерная резка</span></div>
+        <p class="band-title t-big">Звук начинается задолго до&nbsp;первого прикосновения</p>
+      </div>
     </div>
-    <div class="cu-cap">
-      <div class="cell-top t-small"><span>02</span><span>Видеообзор</span></div>
-      <button class="cu-yt" type="button" aria-label="Смотреть полный видеообзор"><i aria-hidden="true"></i><span class="t-mid">Смотреть полный обзор</span><small class="t-small">YouTube</small></button>
-      <p class="cu-title t-big">Каждый язычок крупным планом</p>
-    </div>
-    <div class="cu-bar" aria-hidden="true"><i></i></div>
   </div>
 </section>
 
-<section id="first" class="block">
+<section id="first" class="block" hidden>
   <div class="grid-first">
     <div class="cell c-first">
       <div class="cell-top t-small"><span>03</span><span>Почему первый</span></div>
@@ -108,9 +103,9 @@
 <section id="material" class="block">
   <div class="grid-mat">
     <div class="cell c-why">
-      <div class="cell-top t-small"><span>04</span><span>Материал</span></div>
+      <div class="cell-top t-small"><span>03</span><span>Материал</span></div>
       <h2 class="t-done">Почему титан?</h2>
-      <p class="t-mid">С&nbsp;2013&nbsp;года мы&nbsp;непрерывно экспериментируем и&nbsp;исследуем. Создали больше 10&nbsp;моделей, многие из&nbsp;которых до&nbsp;сих пор не&nbsp;имеют аналогов.</p>
+      <p class="t-mid">Титан&nbsp;– металл, который используется в&nbsp;космической промышленности. Он&nbsp;лёгкий и&nbsp;невероятно прочный, он&nbsp;устойчив к&nbsp;коррозии и&nbsp;перепадам температур. А&nbsp;при&nbsp;нагреве создаются космические оттенки: синий, пурпурный, бронзовый, золотой.</p>
     </div>
     <div class="cell c-tints">
       <div class="cell-top t-small"><span>Цвета побежалости</span><span>Оксид титана</span></div>
@@ -122,7 +117,7 @@
       </ul>
     </div>
     <div class="cell c-mat">
-      <p class="t-body">Титан&nbsp;– металл, который используется в&nbsp;космической промышленности. Он&nbsp;лёгкий и&nbsp;невероятно прочный, он&nbsp;устойчив к&nbsp;коррозии и&nbsp;перепадам температур. А&nbsp;при&nbsp;нагреве создаются космические оттенки: синий, пурпурный, бронзовый, золотой.</p>
+      <p class="t-body">С&nbsp;2013&nbsp;года мы&nbsp;непрерывно экспериментируем и&nbsp;исследуем. Создали больше 10&nbsp;моделей, многие из&nbsp;которых до&nbsp;сих пор не&nbsp;имеют аналогов.</p>
     </div>
     <div class="cell c-mat">
       <p class="t-body">Сделать язычковый барабан не&nbsp;из&nbsp;привычной стали, а&nbsp;из&nbsp;титана&nbsp;– вызов на&nbsp;пути к&nbsp;новому расслабляющему звуку. Работать с&nbsp;ним очень сложно, но&nbsp;результат того стоит.</p>
@@ -130,103 +125,24 @@
   </div>
 </section>
 
-<section id="community" class="block">
-  <div class="grid-2">
-    <div class="cell c-band">
-      <div class="band-frame"><img src="assets/img/d-laser-hq.webp" alt="Волоконный лазер режет титановый лист в мастерской" width="1672" height="941" loading="lazy"></div>
-      <div class="band-cap">
-        <div class="cell-top t-small"><span>05</span><span>Лазерная резка</span></div>
-        <p class="band-title t-big">Вырезали и&nbsp;настроили язычки</p>
-      </div>
+<section id="closeup" class="block closeup">
+  <div class="cu-stage">
+    <div class="cu-frame">
+      <img class="cu-poster" src="assets/img/d-fly-poster.webp" alt="Камера низко пролетает над титановыми язычками" width="1920" height="1080">
+      <video muted playsinline preload="none" aria-hidden="true" data-fly-d="assets/video/fly-d.mp4" data-fly-m="assets/video/fly-m.mp4"></video>
     </div>
-
-    <div class="cell c-state">
-      <div class="cell-top t-small"><span>Сообщество</span><span>Эксперимент</span></div>
-      <p class="manifest t-big">Мы&nbsp;предложили нашим подписчикам принять участие в&nbsp;необычном эксперименте&nbsp;– создать глюкофон из&nbsp;материала, с&nbsp;которым раньше никогда не&nbsp;работали.</p>
+    <div class="cu-cap">
+      <div class="cell-top t-small"><span>04</span><span>Видеообзор</span></div>
+      <button class="cu-yt" type="button" aria-label="Смотреть полный видеообзор"><i aria-hidden="true"></i><span class="t-mid">Смотреть полный обзор</span><small class="t-small">YouTube</small></button>
     </div>
-
-    <div class="cell c-tune">
-      <img src="assets/img/d-shelf.webp" alt="Чаша с вырезанными язычками в мастерской" width="1000" height="1500" loading="lazy">
-      <div class="tune-cap t-small"><span>В&nbsp;мастерской</span></div>
-    </div>
-
-    <div class="cell c-num c-45" id="numbers" aria-hidden="true">
-      <div class="cell-top t-small"><span>Участники</span></div>
-      <span class="t-num">45</span>
-      <span class="viz sq"></span>
-    </div>
-    <div class="cell c-num c-10" aria-hidden="true">
-      <div class="cell-top t-small"><span>Страны</span></div>
-      <span class="t-num">10</span>
-      <span class="viz br"></span>
-    </div>
-
-    <div class="cell c-joined">
-      <h2 class="t-mid">45&nbsp;человек из&nbsp;10&nbsp;стран присоединились к&nbsp;нам.</h2>
-      <p class="t-body">Участники помогали принимать решения на&nbsp;каждом этапе.</p>
-    </div>
-  </div>
-</section>
-
-<section id="money" class="block">
-  <div class="grid-3">
-    <div class="cell c-photo">
-      <img src="assets/img/c-gold.webp" alt="Заготовка титановой чаши с разметкой язычков в мастерской" width="2400" height="1600" loading="lazy">
-      <span class="photo-cap t-small">Из&nbsp;мастерской</span>
-    </div>
-    <div class="cell c-sum">
-      <div class="cell-top t-small"><span>06</span><span>Сбор</span></div>
-      <p class="sum" aria-label="154 000 ₽"></p>
-      <div class="sum-txt"><p class="sum-cap t-big">Столько&nbsp;мы собрали, чтобы эксперимент&nbsp;состоялся.</p>
-        <p class="sum-note t-body">Каждый участник получил артефакт из&nbsp;титана, а&nbsp;одному достался получившийся глюкофон на&nbsp;закрытом розыгрыше.</p></div>
-    </div>
-    <div class="cell c-knew">
-      <div class="cell-top t-small"><span>Риск</span></div>
-      <p class="t-mid">Люди присоединялись, зная, что это эксперимент, и&nbsp;у&nbsp;нас может ничего не&nbsp;получиться.</p>
-    </div>
-    <div class="cell c-trust">
-      <div class="cell-top t-small"><span>Доверие</span></div>
-      <p class="t-mid">И&nbsp;это доверие для&nbsp;нас особенно ценно.</p>
-    </div>
-  </div>
-</section>
-
-<section id="path" class="block path">
-  <div class="path-pin">
-    <div class="path-track">
-      <div class="p-cell p-intro">
-        <div class="cell-top t-small"><span>07</span><span>Путь</span></div>
-        <p class="t-big">Коротко о&nbsp;том, какой путь мы&nbsp;прошли.</p>
-        <p class="p-hint t-small"><i></i>Листайте дальше</p>
-      </div>
-      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-1.webp" alt="Титановый лист на столе лазерного станка" loading="lazy"></div>
-        <div class="p-text"><span class="p-num">01</span><p class="t-body">Нашли и&nbsp;заказали лист редкой, но&nbsp;нужной нам марки титана.</p></div></div>
-      <div class="p-cell p-stage p-explode"><div class="p-photo"><img src="assets/img/d-path-2.webp" alt="Чаши формуют из плоского листа" loading="lazy"></div>
-        <div class="p-text"><span class="p-num">02</span><p class="t-body">Изготовили чаши из&nbsp;плоского листа.</p><p class="boom t-small">Первая чаша у&nbsp;нас взорвалась&nbsp;💥</p></div></div>
-      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-3.webp" alt="Лазер вырезает язычки в чаше" loading="lazy"></div>
-        <div class="p-text"><span class="p-num">03</span><p class="t-body">Вырезали и&nbsp;настроили язычки по&nbsp;нотам с&nbsp;обертонами.</p></div></div>
-      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-4.webp" alt="Соединение двух половинок глюкофона" loading="lazy"></div>
-        <div class="p-text"><span class="p-num">04</span><p class="t-body">Отшлифовали, сделали обжиг в&nbsp;печи и&nbsp;соединили половинки.</p></div></div>
-      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-5.webp" alt="Мастер настраивает титановый глюкофон" loading="lazy"></div>
-        <div class="p-text"><span class="p-num">05</span><p class="t-body">Финально настроили в&nbsp;идеал.</p></div></div>
-      <div class="p-cell p-draw">
-        <div class="cell-top t-small"><span>Финальный этап</span></div>
-        <span class="p-num">06</span>
-        <p class="t-mid">Провели розыгрыш среди участников эксперимента.</p>
-      </div>
-      <a class="p-cell p-end" href="https://www.instagram.com/kosmosky_workshop/" target="_blank" rel="noopener">
-        <div class="cell-top t-small"><span>Instagram</span><span aria-hidden="true">↗</span></div>
-        <p class="t-mid">Видео о&nbsp;каждом этапе смотрите в&nbsp;актуальных «Титан».</p>
-      </a>
-    </div>
-    <div class="p-bar" aria-hidden="true"><i></i></div>
+    <div class="cu-bar" aria-hidden="true"><i></i></div>
   </div>
 </section>
 
 <section id="done" class="block">
   <div class="grid-5">
     <div class="cell c-done">
-      <div class="cell-top t-small"><span>08</span><span>Доступен для&nbsp;заказа</span></div>
+      <div class="cell-top t-small"><span>05</span><span>Доступен для&nbsp;заказа</span></div>
       <h2 class="t-done">У нас получилось!</h2>
       <p class="t-mid">И&nbsp;теперь титановый глюкофон доступен для&nbsp;заказа.</p>
     </div>
@@ -249,7 +165,7 @@
 <section id="rare" class="rare">
   <div class="rare-stage">
     <canvas aria-hidden="true"></canvas>
-    <div class="rare-tag t-small" aria-hidden="true"><span>09</span><span>Ручная работа</span></div>
+    <div class="rare-tag t-small" aria-hidden="true"><span>06</span><span>Ручная работа</span></div>
     <h2 class="rare-title t-hero">Титановые инструменты никогда не&nbsp;станут&nbsp;серийными.</h2>
     <div class="rare-text">
       <p class="rare-p t-body">Сам материал очень дорогой, а&nbsp;каждый инструмент требует сложной обработки и&nbsp;большого количества ручного труда.</p>
@@ -265,9 +181,9 @@
 <section id="price" class="block light">
   <div class="grid-6">
     <div class="cell c-q">
-      <div class="cell-top t-small"><span>10</span><span>Цена</span></div>
+      <div class="cell-top t-small"><span>07</span><span>Цена</span></div>
       <h2 class="t-done">Дорого?</h2>
-      <div class="answer"><p class="t-mid">Конечно, дорого.</p><p class="t-mid">Но&nbsp;результат того стоит.</p></div>
+      <div class="answer"><p class="t-mid">Конечно, да.</p><p class="t-mid">Но&nbsp;результат того стоит.</p></div>
     </div>
     <div class="cell c-arg">
       <div class="cell-top t-small"><span>Звук</span><span>Сталь / Титан</span></div>
@@ -311,11 +227,11 @@
     <canvas class="mlat" aria-hidden="true"></canvas>
     <div class="mgrid">
       <div class="mhead">
-        <div class="cell-top t-small"><span>11</span><span>Модели</span></div>
+        <div class="cell-top t-small"><span>08</span><span>Модели</span></div>
         <h2 class="t-big">Вы можете выбрать одну из&nbsp;моделей под&nbsp;заказ.</h2>
       </div>
       <div class="mright">
-        <div class="cell-top t-small"><span class="mnum">01 / 04</span><span>Титан</span></div>
+        <div class="cell-top t-small"><span class="mnav"><span class="mnum">01 / 04</span><button class="marr" type="button" data-d="-1" aria-label="Предыдущая модель" disabled>←</button><button class="marr" type="button" data-d="1" aria-label="Следующая модель">→</button></span><span>Титан</span></div>
         <div class="mtexts"><div class="mtext"><h3 class="mname t-big"><span>New Wave 15</span></h3><p class="mline t-body">Пятнадцать язычков, каждый настроен на&nbsp;ноту с&nbsp;обертонами.</p></div></div>
       </div>
       <div class="mbuy-l">
@@ -329,6 +245,95 @@
     </div>
   </div>
 </section>
+<section id="community" class="block">
+  <div class="grid-2">
+    <div class="cell c-state">
+      <div class="cell-top t-small"><span>09</span><span>Эксперимент</span></div>
+      <h2 class="t-done">Как всё начиналось?</h2>
+      <div class="state-text">
+        <p class="state-lead t-mid">Инструмент родился из&nbsp;смелой идеи и&nbsp;веры в&nbsp;успех.</p>
+        <p class="manifest t-big">Мы&nbsp;предложили нашим подписчикам принять участие в&nbsp;необычном эксперименте&nbsp;– создать глюкофон из&nbsp;материала, с&nbsp;которым раньше никогда не&nbsp;работали.</p>
+      </div>
+    </div>
+
+    <div class="cell c-tune">
+      <img src="assets/img/d-shelf.webp" alt="Чаша с вырезанными язычками в мастерской" width="1000" height="1500" loading="lazy">
+      <div class="tune-cap t-small"><span>В&nbsp;мастерской</span></div>
+    </div>
+
+    <div class="cell c-num c-45" id="numbers" aria-hidden="true">
+      <div class="cell-top t-small"><span>Участники</span></div>
+      <span class="t-num">45</span>
+      <span class="viz sq"></span>
+    </div>
+    <div class="cell c-num c-10" aria-hidden="true">
+      <div class="cell-top t-small"><span>Страны</span></div>
+      <span class="t-num">10</span>
+      <span class="viz br"></span>
+    </div>
+
+    <div class="cell c-joined">
+      <h2 class="t-mid">45&nbsp;человек из&nbsp;10&nbsp;стран присоединились к&nbsp;нам.</h2>
+      <p class="t-body">Участники помогали принимать решения на&nbsp;каждом этапе.</p>
+    </div>
+  </div>
+</section>
+
+<section id="money" class="block">
+  <div class="grid-3">
+    <div class="cell c-photo">
+      <img src="assets/img/c-gold.webp" alt="Заготовка титановой чаши с разметкой язычков в мастерской" width="2400" height="1600" loading="lazy">
+      <span class="photo-cap t-small">Из&nbsp;мастерской</span>
+    </div>
+    <div class="cell c-sum">
+      <div class="cell-top t-small"><span>10</span><span>Сбор</span></div>
+      <p class="sum" aria-label="154 000 ₽"></p>
+      <div class="sum-txt"><p class="sum-cap t-big">Столько&nbsp;мы собрали, чтобы эксперимент&nbsp;состоялся.</p>
+        <p class="sum-note t-body">Каждый участник получил артефакт из&nbsp;титана, а&nbsp;одному достался получившийся глюкофон на&nbsp;закрытом розыгрыше.</p></div>
+    </div>
+    <div class="cell c-knew">
+      <div class="cell-top t-small"><span>Риск</span></div>
+      <p class="t-mid">Люди присоединялись, зная, что это эксперимент, и&nbsp;у&nbsp;нас может ничего не&nbsp;получиться.</p>
+    </div>
+    <div class="cell c-trust">
+      <div class="cell-top t-small"><span>Доверие</span></div>
+      <p class="t-mid">И&nbsp;это доверие для&nbsp;нас особенно ценно.</p>
+    </div>
+  </div>
+</section>
+
+<section id="path" class="block path">
+  <div class="path-pin">
+    <div class="path-track">
+      <div class="p-cell p-intro">
+        <div class="cell-top t-small"><span>11</span><span>Путь</span></div>
+        <p class="t-big">Коротко о&nbsp;том, какой путь мы&nbsp;прошли.</p>
+        <p class="p-hint t-small"><i></i>Листайте дальше</p>
+      </div>
+      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-1.webp" alt="Титановый лист на столе лазерного станка" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">01</span><p class="t-body">Нашли и&nbsp;заказали лист редкой, но&nbsp;нужной нам марки титана.</p></div></div>
+      <div class="p-cell p-stage p-explode"><div class="p-photo"><img src="assets/img/d-path-2.webp" alt="Чаши формуют из плоского листа" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">02</span><p class="t-body">Изготовили чаши из&nbsp;плоского листа.</p><p class="boom t-small">Первая чаша у&nbsp;нас взорвалась&nbsp;💥</p></div></div>
+      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-3.webp" alt="Лазер вырезает язычки в чаше" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">03</span><p class="t-body">Вырезали и&nbsp;настроили язычки по&nbsp;нотам с&nbsp;обертонами.</p></div></div>
+      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-4.webp" alt="Соединение двух половинок глюкофона" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">04</span><p class="t-body">Отшлифовали, сделали обжиг в&nbsp;печи и&nbsp;соединили половинки.</p></div></div>
+      <div class="p-cell p-stage"><div class="p-photo"><img src="assets/img/d-path-5.webp" alt="Мастер настраивает титановый глюкофон" loading="lazy"></div>
+        <div class="p-text"><span class="p-num">05</span><p class="t-body">Финально настроили в&nbsp;идеал.</p></div></div>
+      <div class="p-cell p-draw">
+        <div class="cell-top t-small"><span>Финальный этап</span></div>
+        <span class="p-num">06</span>
+        <p class="t-mid">Провели розыгрыш среди участников эксперимента.</p>
+      </div>
+      <a class="p-cell p-end" href="https://www.instagram.com/kosmosky_workshop/" target="_blank" rel="noopener">
+        <div class="cell-top t-small"><span>Instagram</span><span aria-hidden="true">↗</span></div>
+        <p class="t-mid">Видео о&nbsp;каждом этапе смотрите в&nbsp;актуальных «Титан».</p>
+      </a>
+    </div>
+    <div class="p-bar" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
 <section id="follow" class="block light">
   <div class="grid-9">
     <div class="cell c-follow">
@@ -373,6 +378,6 @@
 
 <audio class="track" src="assets/audio/titan-sound-2.m4a" preload="auto" loop></audio>
 
-<script src="js/site.js?v=19"></script>
+<script src="js/site.js?v=22"></script>
 </body>
 </html>

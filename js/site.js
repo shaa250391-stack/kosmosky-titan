@@ -44,11 +44,13 @@
 
   /* Бегущая строка: две копии ленты, скорость растёт от скорости скролла */
   const mq = $('.c-marquee'), row = $('.track-row');
-  const row2 = row.cloneNode(true); row2.setAttribute('aria-hidden', 'true'); mq.append(row2);
+  const rows = [row];
   let mx = 0, boost = 0, rowW = 0;
-  const sizeRow = () => rowW = row.getBoundingClientRect().width;
+  /* копий столько, чтобы лента всегда закрывала всю ширину: этапы идут по кругу без пустоты */
+  const sizeRow = () => { rowW = row.getBoundingClientRect().width;
+    while (rowW && rows.length * rowW < mq.clientWidth + rowW) { const c = row.cloneNode(true); c.setAttribute('aria-hidden', 'true'); mq.append(c); rows.push(c); } };
   sizeRow(); addEventListener('resize', sizeRow);
-  const stepMarquee = dt => { mx -= (40 + boost) * dt; if (-mx >= rowW) mx += rowW; row.style.transform = row2.style.transform = `translateX(${mx}px)`; boost *= .92; };
+  const stepMarquee = dt => { mx -= (40 + boost) * dt; if (-mx >= rowW) mx += rowW; rows.forEach(r => r.style.transform = `translateX(${mx}px)`); boost *= .92; };
 
   /* Решётка титана: гексагональная плотноупакованная ячейка, c/a = 4.68/2.95 */
   const cv = $('.c-lattice canvas'), ctx = cv.getContext('2d');
@@ -285,7 +287,9 @@
   const pick = $('.mpick');
   pick.innerHTML = MODELS.map((m, i) => `<li><button type="button" data-k="${i}"${i ? '' : ' aria-current="true"'}><span class="t-small">0${i + 1}</span><span class="n">${m.name}</span><span class="p">${T.from}${m.price}</span></button></li>`).join('');
   const pickBtns = $$('.mpick button');
-  const markPick = k => pickBtns.forEach((b, i) => b.setAttribute('aria-current', i === k));
+  const arrows = $$('.marr');
+  const markPick = k => { pickBtns.forEach((b, i) => b.setAttribute('aria-current', i === k)); arrows.forEach(a => a.disabled = !MODELS[k + +a.dataset.d]); };
+  arrows.forEach(a => a.addEventListener('click', () => { const k = pickBtns.findIndex(b => b.getAttribute('aria-current') === 'true') + +a.dataset.d; if (pickBtns[k]) pickBtns[k].click(); }));
   pickBtns.forEach((b, k) => b.addEventListener('click', () => { markPick(k);
     if (mST) { const p = (k ? HOLD + (k - 1) * STEP + MOVE + HOLD * .5 : HOLD * .5) / total; goY(mST.start + p * (mST.end - mST.start)); }
     else { const it = $$('.mlist .mitem')[k]; if (it) goY(it.getBoundingClientRect().top + scrollY - $('.topbar').offsetHeight - 12); } }));
@@ -401,6 +405,14 @@
     .set(wSplit.lines, { color: '' })
     .to(wPlates, { scaleX: 0, transformOrigin: '100% 50%', duration: .6, stagger: .12, ease: 'power3.inOut' })
     .from('.c-why .t-mid', { opacity: 0, y: 24, duration: 1.1, ease: 'expo.out' }, '<.2');
+  /* 05. «Как всё начиналось?» – тот же приём плашки, что у заголовка 04 */
+  const sSplit = new SplitText('.c-state .t-done', { type: 'lines', linesClass: 'ln' });
+  const sPlates = sSplit.lines.map(l => { const pl = document.createElement('span'); pl.className = 'plate'; l.append(pl); return pl; });
+  gsap.set(sSplit.lines, { color: 'transparent' });
+  gsap.timeline({ scrollTrigger: { trigger: '.c-state', start: 'top 70%' } })
+    .to(sPlates, { scaleX: 1, duration: .55, stagger: .12, ease: 'power3.inOut' })
+    .set(sSplit.lines, { color: '' })
+    .to(sPlates, { scaleX: 0, transformOrigin: '100% 50%', duration: .6, stagger: .12, ease: 'power3.inOut' });
   gsap.timeline({ scrollTrigger: { trigger: '.tints', start: 'top 80%' } })
     .from('.tints', { clipPath: 'inset(0 0 100% 0)', duration: 1.6, ease: 'expo.inOut' })
     .from('.tint span', { opacity: 0, y: 8, duration: .6, stagger: .12 }, '-=.8');
@@ -431,7 +443,8 @@
     .to('.sq i', { backgroundColor: '#ECEAE5', duration: .25, stagger: { each: .028, from: 'start' }, ease: 'none' }, .2)
     .to('.br i', { backgroundColor: '#6F8BFF', scaleY: 1, duration: .6, stagger: .09, ease: 'expo.out' }, .35);
   gsap.from(['.c-joined h2', '.c-joined p'], { opacity: 0, y: 20, duration: 1.2, stagger: .12, ease: 'expo.out', scrollTrigger: { trigger: '.c-joined', start: 'top 85%' } });
-  gsap.from(['.c-state .cell-top', '.c-num .cell-top', '.tune-cap', '.band-cap .cell-top'], { opacity: 0, duration: 1, stagger: .05, scrollTrigger: { trigger: '.c-state', start: 'top 85%' } });
+  gsap.from('.band-cap .cell-top', { opacity: 0, duration: 1, scrollTrigger: { trigger: '.c-band', start: 'top 55%' } });
+  gsap.from(['.c-state .cell-top', '.c-num .cell-top', '.tune-cap'], { opacity: 0, duration: 1, stagger: .05, scrollTrigger: { trigger: '.c-state', start: 'top 85%' } });
   document.fonts.ready.then(() => ScrollTrigger.refresh());
 
   /* ---------- 4. Путь: вертикальный скролл двигает ленту вбок ---------- */
@@ -507,14 +520,12 @@
     gsap.fromTo('.cu-frame', { clipPath: 'inset(10% 14% 10% 14%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.out', scrollTrigger: { trigger: yt, start: 'top bottom', end: 'top 30%', scrub: .8 } });
     ScrollTrigger.create({ trigger: yt, start: 'top bottom', end: 'bottom top', onUpdate: st => { cuSeek(st.progress); gsap.set('.cu-bar i', { scaleX: st.progress }); } });
   }
-  const cuSplit = new SplitText('.cu-title', { type: 'lines', mask: 'lines' });
-  gsap.from(cuSplit.lines, { yPercent: 105, duration: 1.3, stagger: .1, ease: 'expo.out', onComplete: () => cuSplit.revert(), scrollTrigger: { trigger: yt, start: 'top 45%' } });
   gsap.from(['.cu-cap .cell-top', '.cu-yt'], { opacity: 0, y: 12, duration: 1, stagger: .08, ease: 'expo.out', scrollTrigger: { trigger: yt, start: 'top 45%' } });
 
   /* ---------- 11. Модели: инструменты выплывают снизу и уплывают вверх синхронно со сменой имени справа и паспорта ---------- */
   if (useMorph) {
     const drums = $$('.mfloat img'), shadow = $('.mshadow'), texts = $$('.mtexts .mtext'), num = $('.mnum'), specD = $('.mspec [data-s=d]'), specN = $('.mspec [data-s=n]'), specP = $('.mspec [data-s=price]');
-    mSec.style.height = `calc(${mStage.getBoundingClientRect().height}px + ${3 * 90}vh)`;
+    mSec.style.height = `calc(${mStage.getBoundingClientRect().height}px + ${3 * 45}vh)`;
     texts.forEach((t, i) => { if (i) gsap.set(t, { autoAlpha: 0 }); });
     drums.forEach((d, i) => gsap.set(d, i ? { yPercent: 120, rotate: -18, scale: MODELS[i].sc * .9, autoAlpha: 0 } : { yPercent: 0, rotate: 0, scale: MODELS[0].sc, autoAlpha: 1 }));
     gsap.set(shadow, { scale: MODELS[0].sc });
